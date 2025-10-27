@@ -48,6 +48,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
     <style>
+        
         * {
             margin: 0;
             padding: 0;
@@ -422,6 +423,11 @@
             box-shadow: 0 0 0 3px rgba(74, 93, 138, 0.1);
         }
 
+        /* Placeholder styling for select */
+        .placeholder-select { color: #9ca3af; }
+        .placeholder-select option[disabled] { color: #9ca3af; }
+        .placeholder-select:valid { color: #111827; }
+
         .btn-excel {
             background: linear-gradient(135deg, #28a745 0%, #20833a 100%);
             border: none;
@@ -561,6 +567,8 @@
             color: #333;
             padding: 12px 8px;
         }
+        /* Customer name in black */
+        .hrtble1 .viewbtn, .hrtble1 a .viewbtn { color: #000 !important; font-weight:700; }
 
         .table-wrapper tbody td:nth-child(4),
         .table-wrapper tbody td:nth-child(5),
@@ -574,197 +582,111 @@
             font-weight: 400;
         }
 
-        /* Responsive Table */
-        @media (max-width: 768px) {
-            .table-wrapper {
-                padding: 10px;
-            }
+    /* THEME OVERRIDES: fonts, sizes, colors to match screenshot */
+/* Base typography */
+body { font-family: 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; font-size:14px; color:#333; background:#f7f8fa; }
+.container { max-width:1180px; margin:18px auto; }
 
-            .table-wrapper table {
-                font-size: 12px;
-            }
+/* Filters row labels and inputs */
+.filter-card .form-label { font-weight:600; color:#374151; font-size:13px; margin-bottom:6px; }
+.filter-card .form-control, .filter-card .form-select { height:40px; border-radius:6px; border:1px solid #e6e9ef; background:#fff; padding:8px 12px; font-size:13px; }
 
-            .top-bar {
-                padding: 10px 15px;
-            }
-
-            .content-wrapper {
-                padding: 15px;
-            }
-
-            .action-bar,
-            .filter-card {
-                padding: 12px 15px;
-            }
+/* Stats cards */
+.stats-row { display:flex; gap:18px; margin:16px 0; }
+        /* Metric cards: white rounded card with subtle shadow */
+        .stat-card {
+            background: #fff;
+            padding: 10px 14px;
+            border-radius: 6px;
+            border: 1px solid #e9eef6;
+            box-shadow: 0 8px 18px rgba(8,21,66,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            min-width: 220px;
         }
-
-        .input-group-text {
-            background-color: white;
-            border-right: none;
-        }
-
-        .input-group .filter-input {
-            border-left: none;
-            padding-left: 0;
-        }
-
-        /* Additional Responsive Styles */
-        @media (max-width: 576px) {
-            .breadcrumb-custom {
-                font-size: 11px;
-            }
-
-            .btn-new-quotation,
-            .btn-excel {
-                font-size: 11px;
-                padding: 8px 16px;
-            }
-
-                    .stat-label {
-            font-size: 14px;
-            font-weight: 500;
-            letter-spacing: 0px;
-            margin: 0;
-        }
-
-            
-        .stat-card.orange .stat-label {
-            color: #f59e0b;
-        }
-
-        .stat-card.red .stat-label {
-            color: #ef4444;
-        }
-
-        .stat-card.green .stat-label {
-            color: #10b981;
-        }\n        .stat-value {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1f2937;
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-        }
-
-            .sidebar-header h3 {
-                font-size: 15px;
-            }
-
-            .sidebar-menu > li > a {
-                font-size: 13px;
-                padding: 12px 15px;
-            }
-
-            .sidebar-submenu a {
-                font-size: 12px;
-                padding: 10px 15px 10px 45px;
-            }
-        }
-
-        /* Print Styles */
-        @media print {
-            .sidebar,
-            .menu-toggle,
-            .top-bar,
-            .action-bar,
-            .filter-card {
-                display: none;
-            }
-
-            .main-content {
-                margin-left: 0;
-            }
-
-            .table-wrapper {
-                box-shadow: none;
-            }
-        }
-
-        .example {
-            width: 100% !important;
-        }
-
-        .dataTables_wrapper .dataTables_length select {
-            padding: 5px 10px;
+        .stat-label { color:#8b8f98; font-weight:700; font-size:13px; }
+        /* The numeric value sits in a small white box with a subtle shadow */
+        .stat-value {
+            background: #fff;
+            padding: 8px 12px;
             border-radius: 4px;
-            border: 1px solid #ddd;
+            box-shadow: 0 6px 12px rgba(8,21,66,0.08);
+            font-weight: 800;
+            font-size: 16px;
+            color: #000 !important;
+            margin-left: 12px;
+            min-width: 64px;
+            text-align: center;
         }
+        .stat-card.orange .stat-label { color: #f59e0b; }
+        .stat-card.red .stat-label { color: #ef4444; }
+        .stat-card.green .stat-label { color: #10b981; }
+.stat-card.orange .stat-value { color:#f59e0b; }
+.stat-card.red .stat-value { color:#ef4444; }
+.stat-card.green .stat-value { color:#10b981; }
 
-        .dataTables_wrapper .dataTables_filter input {
-            padding: 5px 10px;
-            border-radius: 4px;
-            border: 1px solid #ddd;
+/* Search */
+.dataTables_wrapper .dataTables_filter { float:left !important; }
+.dataTables_wrapper .dataTables_filter input { width:540px; max-width:70%; padding:10px 12px; border-radius:8px; border:1px solid #e6e9ef; background:#fff; }
+
+/* Table */
+.table-wrapper { background:#fff; border-radius:6px; box-shadow:0 2px 6px rgba(0,0,0,0.04); padding:12px; }
+.table-wrapper table { width:100%; border-collapse:collapse; }
+.table-wrapper thead th { background:#f3f6fb; color:#6b7686; font-weight:700; font-size:13px; padding:12px 10px; border-bottom:1px solid #e6e9ef; }
+.table-wrapper tbody td { padding:12px 10px; border-bottom:1px solid #f1f5f9; font-size:14px; color:#111827; }
+.table-wrapper tbody tr:nth-child(even){ background:#fbfdff; }
+
+        /* Vertical column separators to match screenshot */
+        .table-wrapper thead th, .table-wrapper tbody td {
+            border-right: 1px solid #e6edf3;
         }
+        /* remove right border from last column */
+        .table-wrapper thead th:last-child, .table-wrapper tbody td:last-child { border-right: none; }
+        .table-wrapper { border-left: 4px solid rgba(56,72,112,0.12); padding-left: 16px; }
 
-        .header-effect {
-            margin-top: 4px;
-        }
+/* Expiry date emphasis */
+.expiry-date { color:#ef4444; font-weight:700; }
 
+/* Pills */
+.pill-group { display:flex; gap:10px; align-items:center; }
+.tag, .tags .tag { /* grey informational pills */
+    display:inline-block;
+    background: #ffffff; /* near-white */
+    color: #4b5563; /* text muted dark */
+    border: 1px solid #e6e9ef; /* light grey outline */
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1;
+}
+.tags .tag { background: #f3f6fb; } /* keep subtle bluish tint where used */
 
-        .tag-badge {
-            display: inline-block;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 500;
-        }
+/* Outlined red 'Accepted' pill (matches screenshot) */
+.approvedbtn,
+.accepted-pill {
+    display: inline-block;
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #f7a1a1; /* soft red outline */
+    background: #ffffff; /* white background */
+    color: #ef4444; /* prominent red text */
+    font-weight: 700;
+    font-size: 13px;
+    line-height: 1;
+}
 
-        .tags {
-            display: inline-flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-right: 6px;
-        }
+/* ensure small gap between tag group and approved pill */
+.tags { display:inline-flex; gap:8px; align-items:center; margin-right:6px; }
 
-        .tags .tag {
-            display: inline-block;
-            background-color: #e3f2fd;
-            color: #1976d2;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 500;
-        }
+/* Utilities */
+.btn-new-quotation { background:linear-gradient(135deg,#374479,#2f3f74); color:#fff; border:none; padding:8px 16px; border-radius:6px; font-weight:800; }
 
-        .tag-invoiced {
-            background-color: #e3f2fd;
-            color: #1976d2;
-        }
-
-        .tag-accepted {
-            background-color: #e8f5e9;
-            color: #388e3c;
-        }
-
-        .tag-joy {
-            background-color: #fff3e0;
-            color: #f57c00;
-        }
-
-        .tag-havy {
-            background-color: #fce4ec;
-            color: #c2185b;
-        }
-
-        .approvedbtn {
-            background-color: #ef4444;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 500;
-            display: inline-block;
-        }
-
-        .draft_label {
-            background-color: #f59e0b;
-            color: white;
-            padding: 4px 8px;
-            border-radius: 4px;
-            font-size: 12px;
-            font-weight: 500;
-            display: inline-block;
-        }
+@media (max-width:980px){
+  .dataTables_wrapper .dataTables_filter input{ width:100%; max-width:none; }
+  .stats-row{ flex-direction:column; }
+}
     </style>
 </head>
 
@@ -919,11 +841,11 @@
 
                     <div class="col-auto" style="min-width: 180px; max-width: 220px;">
                         <label class="filter-label">Multiple Filter</label>
-                        <select class="form-select filter-select">
-                            <option selected>Change...</option>
-                            <option>Customer</option>
-                            <option>Quotation ID</option>
-                            <option>Status</option>
+                        <select class="form-select filter-select placeholder-select">
+                            <option value="" disabled selected>Change...</option>
+                            <option value="customer">Customer</option>
+                            <option value="quotation">Quotation ID</option>
+                            <option value="status">Status</option>
                         </select>
                     </div>
 
@@ -1280,7 +1202,13 @@
                     search: '',
                     searchPlaceholder: "Search for order ID, customer, order status or something..."
                 },
-                responsive: true,
+                // Keep responsive behavior but ensure Tags column stays visible
+                responsive: {
+                    details: false
+                },
+                columnDefs: [
+                    { responsivePriority: 1, targets: -1 } // last column (Tags) highest priority
+                ],
                 dom: 'lfrtip',
                 pageLength: 10,
                 lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
