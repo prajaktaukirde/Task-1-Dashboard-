@@ -682,6 +682,27 @@
             font-weight: 500;
         }
 
+        .tags {
+            display: inline-flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-right: 6px;
+        }
+
+        .tags .tag {
+            display: inline-block;
+            background-color: #f3f4f6;
+            color: #374151;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        td:nth-child(10) {
+            white-space: nowrap;
+        }
+
         .tag-invoiced {
             background-color: #e3f2fd;
             color: #1976d2;
@@ -700,6 +721,26 @@
         .tag-havy {
             background-color: #fce4ec;
             color: #c2185b;
+        }
+
+        .approvedbtn {
+            background-color: #ef4444;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
+        }
+
+        .draft_label {
+            background-color: #f59e0b;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            display: inline-block;
         }
     </style>
 </head>
@@ -882,15 +923,15 @@
             <!-- Statistics Cards -->
             <div class="stats-row">
                 <div class="stat-card orange">
-                    <div class="stat-label">Converted To Invoice(5)</div>
+                    <div class="stat-label">Converted To Invoice (5)</div>
                     <div class="stat-value">46059</div>
                 </div>
                 <div class="stat-card red">
-                    <div class="stat-label">Quotation(12)</div>
+                    <div class="stat-label">Quotation (12)</div>
                     <div class="stat-value">56319</div>
                 </div>
                 <div class="stat-card green">
-                    <div class="stat-label">Tax Value(4)</div>
+                    <div class="stat-label">Tax Value (4)</div>
                     <div class="stat-value">3364</div>
                 </div>
             </div>
@@ -920,18 +961,14 @@
                                 <td>01</td>
                                 <td class="hrtble1">
                                     <a href="#" class=""><span class="viewbtn">Kia</span></a>
-                                    </td>
+                                </td>
                                 <td>QT-0013</td>
                                 <td>200</td>
                                 <td>10</td>
                                 <td>210</td>
                                 <td>10/10/2025</td>
                                 <td class="expiry-date">17/10/2025</td>
-                                <td>
-                                    <span class="tags">
-                                        <span class="tag">Invoiced</span>
-                                    </span>
-                                </td>
+                                <td></td>
                                 <td><span class="approvedbtn">Accepted</span></td>
                             </tr>
                             <tr class="row-hover">
@@ -939,7 +976,7 @@
                                 <td>02</td>
                                 <td class="hrtble1">
                                     <a href="#" class=""><span class="viewbtn">Kia</span></a>
-                                    </td>
+                                </td>
                                 <td>QT-0012</td>
                                 <td>1000</td>
                                 <td>0</td>
@@ -949,8 +986,8 @@
                                 <td>
                                     <span class="tags">
                                         <span class="tag">Invoiced - INV-0008</span>
-                                        <span class="tag">Accepted</span>
                                     </span>
+                                    <span class="approvedbtn">Accepted</span>
                                 </td>
                                 <td><span class="approvedbtn">Accepted</span></td>
                             </tr>
@@ -959,20 +996,19 @@
                                 <td>03</td>
                                 <td class="hrtble1">
                                     <a href="#" class=""><span class="viewbtn">Gennie</span></a>
-                                    </td>
+                                </td>
                                 <td>QT-0011</td>
                                 <td>2000</td>
                                 <td>95</td>
                                 <td>2100</td>
                                 <td>12/09/2025</td>
                                 <td class="expiry-date">19/09/2025</td>
-              
                                 <td>
                                     <span class="tags">
                                         <span class="tag">Joy</span>
                                         <span class="tag">Invoiced - INV-0009</span>
-                                        <span class="tag">Accepted</span>
                                     </span>
+                                    <span class="approvedbtn">Accepted</span>
                                 </td>
                                 <td><span class="approvedbtn">Accepted</span></td>
                             </tr>
@@ -981,7 +1017,10 @@
                                 <td>04</td>
                                 <td class="hrtble1">
                                     <a href="#" class=""><span class="viewbtn">Loyal</span></a>
-                                    </td>
+                                    <a href="#" style="margin-left: 10px; color: #405189;"><i class="fa fa-eye"></i></a>
+                                    <a href="#" style="margin-left: 8px; color: #405189;"><i class="fa fa-pencil"></i></a>
+                                    <a href="#" style="margin-left: 8px; color: #405189;"><i class="fa fa-file-text-o"></i></a>
+                                </td>
                                 <td>QT-0010</td>
                                 <td>20</td>
                                 <td>0</td>
@@ -993,6 +1032,7 @@
                                         <span class="tag">Havy</span>
                                         <span class="tag">Invoiced - INV-0010</span>
                                     </span>
+                                    <span class="approvedbtn">Accepted</span>
                                 </td>
                                 <td><span class="approvedbtn">Accepted</span></td>
                             </tr>
@@ -1000,8 +1040,8 @@
                                 <td class="progtble"><input type="checkbox" class="single_check"></td>
                                 <td>05</td>
                                 <td class="hrtble1">
-                                    <a href="#" class=""><span class="viewbtn">Unilimited</span></a>
-                                    </td>
+                                    <a href="#" class=""><span class="viewbtn">Unlimited</span></a>
+                                </td>
                                 <td>QT-0009</td>
                                 <td>10</td>
                                 <td>0</td>
@@ -1010,6 +1050,66 @@
                                 <td class="expiry-date">18/09/2025</td>
                                 <td></td>
                                 <td><span class="draft_label">Pending</span></td>
+                            </tr>
+                            <tr class="row-hover">
+                                <td class="progtble"><input type="checkbox" class="single_check"></td>
+                                <td>06</td>
+                                <td class="hrtble1">
+                                    <a href="#" class=""><span class="viewbtn">Loyal</span></a>
+                                </td>
+                                <td>QT-0008</td>
+                                <td>20</td>
+                                <td>0</td>
+                                <td>20</td>
+                                <td>11/09/2025</td>
+                                <td class="expiry-date">18/09/2025</td>
+                                <td></td>
+                                <td><span class="draft_label">Pending</span></td>
+                            </tr>
+                            <tr class="row-hover">
+                                <td class="progtble"><input type="checkbox" class="single_check"></td>
+                                <td>07</td>
+                                <td class="hrtble1">
+                                    <a href="#" class=""><span class="viewbtn">Loyal</span></a>
+                                </td>
+                                <td>QT-0007</td>
+                                <td>10</td>
+                                <td>0</td>
+                                <td>10</td>
+                                <td>11/09/2025</td>
+                                <td class="expiry-date">18/09/2025</td>
+                                <td></td>
+                                <td><span class="draft_label">Pending</span></td>
+                            </tr>
+                            <tr class="row-hover">
+                                <td class="progtble"><input type="checkbox" class="single_check"></td>
+                                <td>08</td>
+                                <td class="hrtble1">
+                                    <a href="#" class=""><span class="viewbtn">Loyal</span></a>
+                                </td>
+                                <td>QT-0006</td>
+                                <td>10</td>
+                                <td>0</td>
+                                <td>10</td>
+                                <td>11/09/2025</td>
+                                <td class="expiry-date">18/09/2025</td>
+                                <td></td>
+                                <td><span class="draft_label">Pending</span></td>
+                            </tr>
+                            <tr class="row-hover">
+                                <td class="progtble"><input type="checkbox" class="single_check"></td>
+                                <td>09</td>
+                                <td class="hrtble1">
+                                    <a href="#" class=""><span class="viewbtn">Nuka Ltd</span></a>
+                                </td>
+                                <td>QT-0005</td>
+                                <td>20100</td>
+                                <td>1450</td>
+                                <td>20020</td>
+                                <td>30/09/2005</td>
+                                <td class="expiry-date">15/09/3025</td>
+                                <td><span class="approvedbtn">Accepted</span></td>
+                                <td><span class="approvedbtn">Accepted</span></td>
                             </tr>
                         </tbody>
                     </table>
@@ -1147,7 +1247,7 @@
                 language: {
                     lengthMenu: '_MENU_',
                     search: '',
-                    searchPlaceholder: "Search for quotation ID, customer..."
+                    searchPlaceholder: "Search for order ID, customer, order status or something..."
                 },
                 responsive: true,
                 dom: 'Blfrtip',
