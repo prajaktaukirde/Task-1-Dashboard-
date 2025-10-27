@@ -567,8 +567,11 @@
             color: #333;
             padding: 12px 8px;
         }
-        /* Customer name in black */
-        .hrtble1 .viewbtn, .hrtble1 a .viewbtn { color: #000 !important; font-weight:700; }
+    /* Customer name in black and remove default link underline */
+    .hrtble1 .viewbtn, .hrtble1 a .viewbtn { color: #000 !important; font-weight:700; text-decoration: none !important; }
+    /* Ensure anchor wrapper doesn't show underline or blue color on any state */
+    .hrtble1 a { color: inherit !important; text-decoration: none !important; }
+    .hrtble1 a:hover, .hrtble1 a:focus, .hrtble1 a:active { color: inherit !important; text-decoration: none !important; outline: none !important; }
 
         .table-wrapper tbody td:nth-child(4),
         .table-wrapper tbody td:nth-child(5),
