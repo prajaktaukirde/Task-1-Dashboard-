@@ -962,27 +962,6 @@
                 </div>
             </div>
 
-            <!-- Export Controls -->
-            <div class="export-controls" style="display: flex; justify-content: flex-end; gap: 12px; margin-bottom: 15px; align-items: center;">
-                <select id="entriesPerPage" class="form-select export-select" style="width: 80px; height: 36px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; padding: 0 12px; background: #f8f9fa; appearance: none; background-image: url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" viewBox=\"0 0 12 12\"><path fill=\"%23333\" d=\"M6 9L1 4h10z\"/></svg>'); background-repeat: no-repeat; background-position: right 8px center; padding-right: 30px;">
-                    <option value="10">10</option>
-                    <option value="25">25</option>
-                    <option value="50" selected>50</option>
-                    <option value="100">100</option>
-                </select>
-                <div class="dropdown">
-                    <button class="btn export-btn dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background: #f8f9fa; border: 1px solid #d1d5db; color: #333; padding: 0 16px; height: 36px; border-radius: 6px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 6px;">
-                        <i class="fa fa-arrow-circle-o-down" style="margin-right: 4px;"></i> EXPORT
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="exportDropdown">
-                        <li><a class="dropdown-item" href="#" onclick="exportToExcel()"><i class="fa fa-file-excel-o"></i> Excel</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="exportToCSV()"><i class="fa fa-file-code-o"></i> CSV</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="exportToPDF()"><i class="fa fa-file-pdf-o"></i> PDF</a></li>
-                        <li><a class="dropdown-item" href="#" onclick="printTable()"><i class="fa fa-print"></i> Print</a></li>
-                    </ul>
-                </div>
-            </div>
-
             <!-- Data Table -->
             <div class="table-wrapper">
                 <div class="demo-html mt-0">
@@ -1302,13 +1281,39 @@
                     searchPlaceholder: "Search for order ID, customer, order status or something..."
                 },
                 responsive: true,
-                dom: 'rtip',
+                dom: '<"row mb-3"<"col-sm-12 col-md-6"f><"col-sm-12 col-md-6 custom-export-controls"><"col-12">rt<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
                 pageLength: 50,
                 lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]],
                 drawCallback: function() {
                     // Hide default pagination info and length menu
                     $('.dataTables_info').hide();
                     $('.dataTables_length').hide();
+                },
+                initComplete: function() {
+                    // Add custom controls after initialization
+                    var controlsHtml = '<select id="entriesPerPage" style="width: 70px; height: 36px; border: 1px solid #d1d5db; border-radius: 6px; font-size: 14px; padding: 0 12px; background: #f8f9fa; appearance: none; background-image: url(\'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23333" d="M6 9L1 4h10z"/></svg>\'); background-repeat: no-repeat; background-position: right 8px center; padding-right: 28px; cursor: pointer;">' +
+                        '<option value="10">10</option>' +
+                        '<option value="25">25</option>' +
+                        '<option value="50" selected>50</option>' +
+                        '<option value="100">100</option>' +
+                        '</select>' +
+                        '<div class="dropdown">' +
+                        '<button class="btn export-btn dropdown-toggle" type="button" id="exportDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="background: #f8f9fa; border: 1px solid #d1d5db; color: #333; padding: 0 16px; height: 36px; border-radius: 6px; font-size: 13px; font-weight: 500; display: flex; align-items: center; gap: 6px;">' +
+                        '<i class="fa fa-arrow-circle-o-down" style="margin-right: 4px;"></i> EXPORT' +
+                        '</button>' +
+                        '<ul class="dropdown-menu" aria-labelledby="exportDropdown">' +
+                        '<li><a class="dropdown-item" href="#" onclick="exportToExcel()"><i class="fa fa-file-excel-o"></i> Excel</a></li>' +
+                        '<li><a class="dropdown-item" href="#" onclick="exportToCSV()"><i class="fa fa-file-code-o"></i> CSV</a></li>' +
+                        '<li><a class="dropdown-item" href="#" onclick="exportToPDF()"><i class="fa fa-file-pdf-o"></i> PDF</a></li>' +
+                        '<li><a class="dropdown-item" href="#" onclick="printTable()"><i class="fa fa-print"></i> Print</a></li>' +
+                        '</ul></div>';
+                    
+                    $('.custom-export-controls').html('<div style="display: flex; justify-content: flex-end; gap: 12px; align-items: center;">' + controlsHtml + '</div>');
+                    
+                    // Entries per page dropdown
+                    $('#entriesPerPage').on('change', function() {
+                        table.page.len(parseInt($(this).val())).draw();
+                    });
                 }
             });
 
@@ -1328,11 +1333,6 @@
             var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
             var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
                 return new bootstrap.Tooltip(tooltipTriggerEl);
-            });
-
-            // Entries per page dropdown
-            $('#entriesPerPage').on('change', function() {
-                table.page.len(parseInt($(this).val())).draw();
             });
 
             // Export functions
