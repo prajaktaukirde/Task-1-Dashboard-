@@ -9,49 +9,56 @@
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/prajaktaukirde/Task-1-Dashboard-)
 
-##  Key Features
+##  Dashboard Features
 
--  **Real-time Statistics** - Track converted invoices, active quotations, and tax values
--  **Advanced Filtering** - Date range, multi-filter, and zone/region selection  
--  **Fully Responsive** - Mobile-first design with collapsible sidebar
--  **DataTables Integration** - Sorting, pagination, and instant search
--  **Professional Action Icons** - Color-coded view, edit, delete, and more buttons
--  **Expandable Navigation** - Organized sidebar with search functionality
--  **Excel Export** - Download quotation data instantly
+-  **Dashboard Statistics** - Real-time quotation metrics with hover effects
+-  **Dashboard Filters** - Date range, multi-filter, and zone/region selection  
+-  **Responsive Dashboard** - Mobile-first design with collapsible sidebar
+-  **Dashboard Data Table** - Sorting, pagination, and instant search powered by DataTables
+-  **Dashboard Action Icons** - Professional color-coded buttons (View/Edit/Delete/More)
+-  **Dashboard Navigation** - Expandable sidebar menu with real-time search
+-  **Dashboard Export** - Excel download functionality
 
-##  Technology Stack
+##  Dashboard Technology
 
-- **Bootstrap 5.3.0** - Responsive framework
-- **jQuery 3.7.0** - JavaScript library
-- **DataTables 1.13.6** - Advanced table features
-- **Font Awesome 6.4.0** - Professional icons
-- **System Fonts** - Native performance
+- **Bootstrap 5.3.0** - Responsive dashboard framework
+- **jQuery 3.7.0** - Dashboard interactions
+- **DataTables 1.13.6** - Advanced dashboard table features
+- **Font Awesome 6.4.0** - Dashboard icons
+- **System Fonts** - Optimized dashboard performance
 
-##  Changelog
+##  Dashboard Updates
 
-### v1.3.0 - Professional Icon Redesign
--  Clean styled action buttons with hover effects
--  Color-coded icons (Blue/Green/Red/Gray)
--  Improved spacing and visual hierarchy
+See [CHANGELOG.md](CHANGELOG.md) for detailed dashboard version history.
 
-### v1.2.0 - CDN Migration
--  Replaced local SVGs with Font Awesome icons
--  Full CDN asset integration for deployment
--  Fixed broken image references
+### Latest Dashboard Improvements (v1.3.0)
+-  Enhanced dashboard with professional styled action icons
+-  Color-coded dashboard icon buttons with hover effects
+-  Improved dashboard visual hierarchy and spacing
+-  Optimized dashboard mobile responsiveness
 
-### v1.1.0 - Layout Enhancement
--  Fixed filter section horizontal alignment
--  Responsive overflow handling
--  Mobile-optimized layout
+### Previous Dashboard Updates
+- **v1.2.0** - Dashboard CDN migration and icon improvements
+- **v1.1.0** - Dashboard layout enhancements and filter alignment
+- **v1.0.0** - Initial responsive dashboard release
 
-### v1.0.0 - Initial Release
--  Responsive quotation dashboard
--  Statistics cards and data table
--  Modern Bootstrap 5 UI
+##  Deploy Dashboard
 
-##  Author
+### Quick Dashboard Deployment
+1. Click **Deploy with Vercel** button above
+2. Import dashboard repository
+3. Deploy with default settings
+
+### Local Dashboard Preview
+\\\ash
+git clone https://github.com/prajaktaukirde/Task-1-Dashboard-.git
+cd Task-1-Dashboard-
+python -m http.server 8080
+\\\
+
+##  Dashboard Author
 
 **Prajakta Ukirde** - [@prajaktaukirde](https://github.com/prajaktaukirde)
 
 ---
-Built with  using Bootstrap, DataTables, and Font Awesome
+**Professional Dashboard built with  using Bootstrap, DataTables, and Font Awesome**
