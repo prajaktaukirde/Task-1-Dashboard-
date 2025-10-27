@@ -815,8 +815,8 @@
 
             <!-- Filter Section -->
             <div class="filter-card">
-                <div class="row g-3">
-                    <div class="col-auto" style="width: 280px;">
+                <div class="row g-2 align-items-end" style="flex-wrap: nowrap; overflow-x: auto;">
+                    <div class="col-auto" style="min-width: 250px; max-width: 280px;">
                         <label class="filter-label">Date</label>
                         <div class="input-group">
                             <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
@@ -825,7 +825,7 @@
                         </div>
                     </div>
 
-                    <div class="col-auto" style="width: 220px;">
+                    <div class="col-auto" style="min-width: 180px; max-width: 220px;">
                         <label class="filter-label">Multiple Filter</label>
                         <select class="form-select filter-select">
                             <option selected>Change...</option>
@@ -835,7 +835,7 @@
                         </select>
                     </div>
 
-                    <div class="col-auto" style="width: 220px;">
+                    <div class="col-auto" style="min-width: 180px; max-width: 220px;">
                         <label class="filter-label">Zone/Region</label>
                         <select class="form-select filter-select">
                             <option selected>Select Zone/Region</option>
@@ -846,7 +846,7 @@
                         </select>
                     </div>
 
-                    <div class="col-auto" style="margin-top: 30px;">
+                    <div class="col-auto">
                         <button type="button" class="btn-excel">
                             <i class="fa fa-download"></i>Excel Download
                         </button>
