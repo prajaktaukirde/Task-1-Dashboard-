@@ -1,0 +1,1247 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quotation - Hepsiba Pvt Limited</title>
+
+    <link rel="shortcut icon" href="../../assets/img/salesqueen_logo.jpeg" type="image/x-icon">
+    <!--Bootstrap 5 CSS--->
+    <link rel="stylesheet" type="text/css" href="../../assets/Bootstrap5/css/bootstrap.css" />
+
+    <!--Bootstrap 5 JS--->
+    <script type="text/javascript" src="../../assets/Bootstrap5/js/bootstrap.bundle.min.js"></script>
+
+    <!--Bootstrap Icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+
+    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/de952d599f.js" crossorigin="anonymous"></script>
+
+    <!--datatables CSS--->
+    <link rel="stylesheet" type="text/css" href="../../assets/datatables/css/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/datatables/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/datatables/css/buttons.dataTables.min.css" />
+
+    <!--Datatables js-->
+    <script type="text/javascript" src="../../assets/js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="../../assets/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/dataTables.responsive.min.js"></script>
+
+    <!--Datatable dropdown----->
+    <script type="text/javascript" src="../../assets/js/datatables.pdfmake.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/datatables.vfs_fonts.js"></script>
+    <script type="text/javascript" src="../../assets/js/datatables.jszip.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/buttons.print.min.js"></script>
+
+    <!--Dropdown select-->
+    <link rel="stylesheet" href="../../assets/Bootstrap5/css/bootstrap-select.min.css" />
+    <script src="../../assets/Bootstrap5/js/bootstrap-select.min.js"></script>
+
+    <!-- Include Date Range Picker -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+
+    <link rel="stylesheet" href="../../assets/css/theme.css" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <link rel="stylesheet" href="../../assets/css/modal.css" />
+    <link rel="stylesheet" href="../../assets/css/sales.css" />
+    <link rel="stylesheet" href="../../assets/css/table.css" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #eceff4;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 280px;
+            background: linear-gradient(180deg, #5a6d9e 0%, #4a5d8a 50%, #3a4d7a 100%);
+            color: white;
+            overflow-y: auto;
+            overflow-x: hidden;
+            z-index: 1000;
+            box-shadow: 3px 0 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1001;
+            background: #4a5d8a;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Responsive Sidebar */
+        @media (max-width: 992px) {
+            .sidebar {
+                left: -280px;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                left: -100%;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .stats-row {
+                flex-direction: column;
+            }
+
+            .filter-card .row {
+                flex-direction: column;
+            }
+
+            .filter-card .col-auto {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+
+        .sidebar-header {
+            padding: 22px 20px;
+            background: rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        .sidebar-header h3 {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 0.3px;
+        }
+
+        .sidebar-search input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .sidebar-search input:focus {
+            background: rgba(255,255,255,0.25) !important;
+            color: white;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
+        }
+
+        .sidebar-menu {
+            padding: 0;
+            margin: 10px 0;
+            list-style: none;
+            display: block;
+            visibility: visible;
+        }
+
+        .sidebar-menu > li {
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            display: block;
+            visibility: visible;
+        }
+
+        .sidebar-menu > li > a {
+            display: flex !important;
+            align-items: center;
+            padding: 14px 20px;
+            color: rgba(255,255,255,0.85) !important;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            visibility: visible !important;
+        }
+
+        .sidebar-menu > li > a span {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .sidebar-menu > li > a i.fa:first-child {
+            margin-right: 12px;
+            width: 20px;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .sidebar-menu > li > a:hover {
+            background: rgba(255,255,255,0.12);
+            color: white;
+        }
+
+        .sidebar-menu .fa-chevron-down {
+            font-size: 11px;
+            margin-left: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-submenu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background: rgba(0,0,0,0.25);
+            display: none;
+        }
+
+        .sidebar-submenu.show {
+            display: block;
+        }
+
+        .sidebar-submenu li {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .sidebar-submenu li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-submenu a {
+            display: flex;
+            align-items: center;
+            padding: 11px 20px 11px 52px;
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            font-weight: 400;
+        }
+
+        .sidebar-submenu a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .sidebar-submenu a.active {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            font-weight: 500;
+        }
+
+        .sidebar-submenu a i {
+            margin-right: 10px;
+            font-size: 12px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 0;
+            min-height: 100vh;
+            background-color: #eceff4;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Responsive Main Content */
+        @media (max-width: 992px) {
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .top-bar {
+            background: white;
+            padding: 12px 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        .breadcrumb-custom {
+            background: transparent;
+            padding: 0;
+            margin: 0;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb-custom li {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .breadcrumb-custom a {
+            color: #4a5d8a;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb-custom a:hover {
+            color: #3a4d7a;
+        }
+
+        .breadcrumb-custom .active {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .content-wrapper {
+            padding: 20px 25px;
+        }
+
+        .action-bar {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+
+        .btn-new-quotation {
+            background: linear-gradient(135deg, #4a5d8a 0%, #3a4d7a 100%);
+            border: none;
+            color: white;
+            padding: 9px 22px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(74, 93, 138, 0.3);
+        }
+
+        .btn-new-quotation:hover {
+            background: linear-gradient(135deg, #3a4d7a 0%, #2a3d6a 100%);
+            box-shadow: 0 4px 12px rgba(74, 93, 138, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-new-quotation:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(74, 93, 138, 0.3);
+        }
+
+        .btn-new-quotation i {
+            margin-right: 6px;
+            font-size: 12px;
+        }
+
+        .filter-card {
+            background: white;
+            padding: 18px 20px;
+            border-radius: 6px;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+        }
+
+        .filter-label {
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 6px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .filter-input,
+        .filter-select {
+            height: 38px;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            font-size: 13px;
+            padding: 0 12px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .filter-input:focus,
+        .filter-select:focus {
+            border-color: #4a5d8a;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 93, 138, 0.1);
+        }
+
+        .btn-excel {
+            background: linear-gradient(135deg, #28a745 0%, #20833a 100%);
+            border: none;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 5px;
+            height: 38px;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-excel:hover {
+            background: linear-gradient(135deg, #20833a 0%, #1a6d2f 100%);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-excel:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-excel i {
+            margin-right: 6px;
+            font-size: 11px;
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            flex: 1;
+            background: white;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+        }
+
+        .stat-card:active {
+            transform: translateY(-1px);
+        }
+
+        .stat-card.orange {
+            border-left-color: #ff9800;
+        }
+
+        .stat-card.red {
+            border-left-color: #f44336;
+        }
+
+        .stat-card.green {
+            border-left-color: #4caf50;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: #666;
+            letter-spacing: 0.3px;
+        }
+
+        .stat-card.orange .stat-label {
+            color: #ff9800;
+        }
+
+        .stat-card.red .stat-label {
+            color: #f44336;
+        }
+
+        .stat-card.green .stat-label {
+            color: #4caf50;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1.2;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .table-wrapper {
+            background: white;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            overflow-x: auto;
+        }
+
+        /* Table Styling */
+        .table-wrapper table {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .table-wrapper thead th {
+            font-weight: 500;
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table-wrapper tbody td {
+            font-size: 13px;
+            color: #333;
+            padding: 12px 8px;
+        }
+
+        .table-wrapper tbody td:nth-child(4),
+        .table-wrapper tbody td:nth-child(5),
+        .table-wrapper tbody td:nth-child(6) {
+            font-weight: 500;
+        }
+
+        /* Red expiry dates */
+        .expiry-date {
+            color: #ff5252 !important;
+            font-weight: 400;
+        }
+
+        /* Responsive Table */
+        @media (max-width: 768px) {
+            .table-wrapper {
+                padding: 10px;
+            }
+
+            .table-wrapper table {
+                font-size: 12px;
+            }
+
+            .top-bar {
+                padding: 10px 15px;
+            }
+
+            .content-wrapper {
+                padding: 15px;
+            }
+
+            .action-bar,
+            .filter-card {
+                padding: 12px 15px;
+            }
+        }
+
+        .input-group-text {
+            background-color: white;
+            border-right: none;
+        }
+
+        .input-group .filter-input {
+            border-left: none;
+            padding-left: 0;
+        }
+
+        /* Additional Responsive Styles */
+        @media (max-width: 576px) {
+            .breadcrumb-custom {
+                font-size: 11px;
+            }
+
+            .btn-new-quotation,
+            .btn-excel {
+                font-size: 11px;
+                padding: 8px 16px;
+            }
+
+            .stat-label {
+                font-size: 11px;
+            }
+
+            .stat-value {
+                font-size: 24px;
+            }
+
+            .sidebar-header h3 {
+                font-size: 15px;
+            }
+
+            .sidebar-menu > li > a {
+                font-size: 13px;
+                padding: 12px 15px;
+            }
+
+            .sidebar-submenu a {
+                font-size: 12px;
+                padding: 10px 15px 10px 45px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .sidebar,
+            .menu-toggle,
+            .top-bar,
+            .action-bar,
+            .filter-card {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .table-wrapper {
+                box-shadow: none;
+            }
+        }
+
+        .example {
+            width: 100% !important;
+        }
+
+        .dataTables_wrapper .dataTables_length select {
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .header-effect a {
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .header-effect img {
+            transition: transform 0.2s;
+        }
+
+        .header-effect img:hover {
+            transform: scale(1.2);
+        }
+
+        .tag-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .tag-invoiced {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .tag-accepted {
+            background-color: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .tag-joy {
+            background-color: #fff3e0;
+            color: #f57c00;
+        }
+
+        .tag-havy {
+            background-color: #fce4ec;
+            color: #c2185b;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle" onclick="toggleMobileMenu()">
+        <i class="fa fa-bars"></i>
+    </button>
+
+    <!-- Left Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Hepsiba Pvt Limited</h3>
+        </div>
+        
+        <!-- Search Bar -->
+        <div class="sidebar-search" style="padding: 15px;">
+            <div class="input-group">
+                <span class="input-group-text" style="background: rgba(255,255,255,0.15); border: none; color: white;">
+                    <i class="fa fa-search"></i>
+                </span>
+                <input type="text" class="form-control" id="sidebarSearch" placeholder="Search menu..." 
+                    style="background: rgba(255,255,255,0.15); border: none; color: white; font-size: 13px;"
+                    onkeyup="searchMenu()">
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li>
+                <a href="#">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>ORDER</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-user"></i>
+                    <span>CUSTOMER</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-truck"></i>
+                    <span>VENDOR</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-shopping-bag"></i>
+                    <span>SALES</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+                <ul class="sidebar-submenu show">
+                    <li><a href="#" class="active"><i class="fa fa-file-text-o"></i>Quotation</a></li>
+                    <li><a href="#"><i class="fa fa-file-text"></i>Sales Order</a></li>
+                    <li><a href="#"><i class="fa fa-file-invoice"></i>Pro Forma Invoice</a></li>
+                    <li><a href="#"><i class="fa fa-file-invoice-dollar"></i>Invoice</a></li>
+                    <li><a href="#"><i class="fa fa-credit-card"></i>Payments In</a></li>
+                    <li><a href="#"><i class="fa fa-sticky-note"></i>Credit Notes</a></li>
+                    <li><a href="#"><i class="fa fa-chart-bar"></i>Report</a></li>
+                    <li><a href="#"><i class="fa fa-cog"></i>Settings</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-shopping-basket"></i>
+                    <span>PURCHASE</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+                <ul class="sidebar-submenu">
+                    <li><a href="#"><i class="fa fa-check-circle"></i>Quality</a></li>
+                    <li><a href="#"><i class="fa fa-money-bill-wave"></i>Payments Out</a></li>
+                    <li><a href="#"><i class="fa fa-receipt"></i>Debit Notes</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-users-cog"></i>
+                    <span>MANAGEMENT</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-warehouse"></i>
+                    <span>INVENTORY</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-desktop"></i>
+                    <span>CRM</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-box"></i>
+                    <span>PRODUCTS</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-calculator"></i>
+                    <span>ACCOUNTING</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Top Bar with Breadcrumb -->
+        <div class="top-bar">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb-custom breadcrumb">
+                    <li class="breadcrumb-item"><a href="#"><i class="fa fa-home"></i></a></li>
+                    <li class="breadcrumb-item"><a href="#">SALES</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">QUOTATION</li>
+                </ol>
+            </nav>
+        </div>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Action Bar with NEW QUOTATION Button -->
+            <div class="action-bar">
+                <button type="button" class="btn-new-quotation">
+                    <i class="fa fa-plus"></i>NEW QUOTATION
+                </button>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-card">
+                <div class="row g-3">
+                    <div class="col-auto" style="width: 280px;">
+                        <label class="filter-label">Date</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
+                            <input type="text" id="daterange" class="form-control filter-input"
+                                value="1st Apr 2025 - 31st Mar 2026" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-auto" style="width: 220px;">
+                        <label class="filter-label">Multiple Filter</label>
+                        <select class="form-select filter-select">
+                            <option selected>Change...</option>
+                            <option>Customer</option>
+                            <option>Quotation ID</option>
+                            <option>Status</option>
+                        </select>
+                    </div>
+
+                    <div class="col-auto" style="width: 220px;">
+                        <label class="filter-label">Zone/Region</label>
+                        <select class="form-select filter-select">
+                            <option selected>Select Zone/Region</option>
+                            <option>North</option>
+                            <option>South</option>
+                            <option>East</option>
+                            <option>West</option>
+                        </select>
+                    </div>
+
+                    <div class="col-auto" style="margin-top: 30px;">
+                        <button type="button" class="btn-excel">
+                            <i class="fa fa-download"></i>Excel Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="stats-row">
+                <div class="stat-card orange">
+                    <div class="stat-label">Converted To Invoice(5)</div>
+                    <div class="stat-value">46059</div>
+                </div>
+                <div class="stat-card red">
+                    <div class="stat-label">Quotation(12)</div>
+                    <div class="stat-value">56319</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-label">Tax Value(4)</div>
+                    <div class="stat-value">3364</div>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="table-wrapper">
+                <div class="demo-html mt-0">
+                    <table class="example display dataTable display responsive nowrap tblalign table borderless" id="example">
+                        <thead class="theadrow">
+                            <tr>
+                                <th><input type="checkbox" id="all_check"></th>
+                                <th>S.No</th>
+                                <th>Customer Name</th>
+                                <th>Quotation ID</th>
+                                <th>Sub Total</th>
+                                <th>Tax Total</th>
+                                <th>Total</th>
+                                <th>Date</th>
+                                <th>Expiry Date</th>
+                                <th>Tags</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="row-hover">
+                                <td class="progtble"><input type="checkbox" class="single_check"></td>
+                                <td>01</td>
+                                <td class="hrtble1">
+                                    <a href="#" class=""><span class="viewbtn">Kia</span></a>
+                                    <p class="header-effect">
+                                        <a onclick="toggleViews(1)" data-bs-toggle="tooltip" data-bs-title="view">
+                                            <img src="../../assets/img/view.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="edit">
+                                            <img src="../../assets/img/edit.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="delete">
+                                            <img src="../../assets/img/delete.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                    </p>
+                                    <div class="dropdown">
+                                        <button type="button" data-bs-toggle="dropdown" aria-expanded="false" id="three-dots">
+                                            <img src="../../assets/img/3-vertical-dots-icon.svg" height="15px" width="15px" alt="three-dots" data-bs-toggle="tooltip" data-bs-title="more">
+                                        </button>
+                                        <ul class="dropdown-menu dropshow three-dots-ul">
+                                            <li><a class="dropdown-item" href="#">Not Started</a></li>
+                                            <li><a class="dropdown-item" href="#">Testing</a></li>
+                                            <li><a class="dropdown-item" href="#">Awaiting Feedback</a></li>
+                                            <li><a class="dropdown-item" href="#">Complete</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>QT-0013</td>
+                                <td>200</td>
+                                <td>10</td>
+                                <td>210</td>
+                                <td>10/10/2025</td>
+                                <td class="expiry-date">17/10/2025</td>
+                                <td>
+                                    <span class="tags">
+                                        <span class="tag">Invoiced</span>
+                                    </span>
+                                </td>
+                                <td><span class="approvedbtn">Accepted</span></td>
+                            </tr>
+                            <tr class="row-hover">
+                                <td class="progtble"><input type="checkbox" class="single_check"></td>
+                                <td>02</td>
+                                <td class="hrtble1">
+                                    <a href="#" class=""><span class="viewbtn">Kia</span></a>
+                                    <p class="header-effect">
+                                        <a onclick="toggleViews(1)" data-bs-toggle="tooltip" data-bs-title="view">
+                                            <img src="../../assets/img/view.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="edit">
+                                            <img src="../../assets/img/edit.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="delete">
+                                            <img src="../../assets/img/delete.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                    </p>
+                                </td>
+                                <td>QT-0012</td>
+                                <td>1000</td>
+                                <td>0</td>
+                                <td>1000</td>
+                                <td>09/10/2025</td>
+                                <td class="expiry-date">16/10/2025</td>
+                                <td>
+                                    <span class="tags">
+                                        <span class="tag">Invoiced - INV-0008</span>
+                                        <span class="tag">Accepted</span>
+                                    </span>
+                                </td>
+                                <td><span class="approvedbtn">Accepted</span></td>
+                            </tr>
+                            <tr class="row-hover">
+                                <td class="progtble"><input type="checkbox" class="single_check"></td>
+                                <td>03</td>
+                                <td class="hrtble1">
+                                    <a href="#" class=""><span class="viewbtn">Gennie</span></a>
+                                    <p class="header-effect">
+                                        <a onclick="toggleViews(1)" data-bs-toggle="tooltip" data-bs-title="view">
+                                            <img src="../../assets/img/view.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="edit">
+                                            <img src="../../assets/img/edit.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="delete">
+                                            <img src="../../assets/img/delete.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                    </p>
+                                </td>
+                                <td>QT-0011</td>
+                                <td>2000</td>
+                                <td>95</td>
+                                <td>2100</td>
+                                <td>12/09/2025</td>
+                                <td class="expiry-date">19/09/2025</td>
+              
+                                <td>
+                                    <span class="tags">
+                                        <span class="tag">Joy</span>
+                                        <span class="tag">Invoiced - INV-0009</span>
+                                        <span class="tag">Accepted</span>
+                                    </span>
+                                </td>
+                                <td><span class="approvedbtn">Accepted</span></td>
+                            </tr>
+                            <tr class="row-hover">
+                                <td class="progtble"><input type="checkbox" class="single_check"></td>
+                                <td>04</td>
+                                <td class="hrtble1">
+                                    <a href="#" class=""><span class="viewbtn">Loyal</span></a>
+                                    <p class="header-effect">
+                                        <a onclick="toggleViews(1)" data-bs-toggle="tooltip" data-bs-title="view">
+                                            <img src="../../assets/img/view.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="edit">
+                                            <img src="../../assets/img/edit.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="delete">
+                                            <img src="../../assets/img/delete.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                    </p>
+                                </td>
+                                <td>QT-0010</td>
+                                <td>20</td>
+                                <td>0</td>
+                                <td>20</td>
+                                <td>11/09/2025</td>
+                                <td class="expiry-date">18/09/2025</td>
+                                <td>
+                                    <span class="tags">
+                                        <span class="tag">Havy</span>
+                                        <span class="tag">Invoiced - INV-0010</span>
+                                    </span>
+                                </td>
+                                <td><span class="approvedbtn">Accepted</span></td>
+                            </tr>
+                            <tr class="row-hover">
+                                <td class="progtble"><input type="checkbox" class="single_check"></td>
+                                <td>05</td>
+                                <td class="hrtble1">
+                                    <a href="#" class=""><span class="viewbtn">Unilimited</span></a>
+                                    <p class="header-effect">
+                                        <a onclick="toggleViews(1)" data-bs-toggle="tooltip" data-bs-title="view">
+                                            <img src="../../assets/img/view.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="edit">
+                                            <img src="../../assets/img/edit.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="delete">
+                                            <img src="../../assets/img/delete.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                    </p>
+                                </td>
+                                <td>QT-0009</td>
+                                <td>10</td>
+                                <td>0</td>
+                                <td>10</td>
+                                <td>11/09/2025</td>
+                                <td class="expiry-date">18/09/2025</td>
+                                <td></td>
+                                <td><span class="draft_label">Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 992) {
+                if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                    sidebar.classList.remove('active');
+                }
+            }
+        });
+
+        // Sidebar submenu toggle
+        function toggleSubmenu(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const parent = event.currentTarget.parentElement;
+            const submenu = parent.querySelector('.sidebar-submenu');
+            if (submenu) {
+                submenu.classList.toggle('show');
+                const icon = event.currentTarget.querySelector('.fa-chevron-down');
+                if (icon) {
+                    icon.style.transform = submenu.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+                }
+            }
+        }
+
+        // Search menu functionality
+        function searchMenu() {
+            const searchInput = document.getElementById('sidebarSearch').value.toLowerCase();
+            const menuItems = document.querySelectorAll('.sidebar-menu > li');
+            
+            menuItems.forEach(item => {
+                const menuText = item.textContent.toLowerCase();
+                const submenuItems = item.querySelectorAll('.sidebar-submenu li');
+                let hasMatch = false;
+                
+                // Check main menu item
+                if (menuText.includes(searchInput)) {
+                    item.style.display = '';
+                    hasMatch = true;
+                    
+                    // Show submenu if search matches
+                    const submenu = item.querySelector('.sidebar-submenu');
+                    if (submenu && searchInput !== '') {
+                        submenu.classList.add('show');
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+                
+                // Check submenu items
+                submenuItems.forEach(subItem => {
+                    const subText = subItem.textContent.toLowerCase();
+                    if (subText.includes(searchInput)) {
+                        item.style.display = '';
+                        subItem.style.display = '';
+                        hasMatch = true;
+                        
+                        // Show parent submenu
+                        const submenu = item.querySelector('.sidebar-submenu');
+                        if (submenu) {
+                            submenu.classList.add('show');
+                        }
+                    } else if (searchInput !== '') {
+                        subItem.style.display = 'none';
+                    } else {
+                        subItem.style.display = '';
+                    }
+                });
+                
+                // Reset display if search is empty
+                if (searchInput === '') {
+                    item.style.display = '';
+                    submenuItems.forEach(subItem => {
+                        subItem.style.display = '';
+                    });
+                }
+            });
+        }
+
+        // Add active state to menu items on click
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuLinks = document.querySelectorAll('.sidebar-submenu a');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Remove active class from all links
+                    menuLinks.forEach(l => l.classList.remove('active'));
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                });
+            });
+        });
+
+        // Make buttons interactive
+        document.addEventListener('DOMContentLoaded', function() {
+            // NEW QUOTATION button
+            const newQuotationBtn = document.querySelector('.btn-new-quotation');
+            if (newQuotationBtn) {
+                newQuotationBtn.addEventListener('click', function() {
+                    alert('New Quotation form will open here');
+                });
+            }
+
+            // Excel Download button
+            const excelBtn = document.querySelector('.btn-excel');
+            if (excelBtn) {
+                excelBtn.addEventListener('click', function() {
+                    alert('Excel download will start');
+                });
+            }
+        });
+
+        $(document).ready(function () {
+            // Initialize DataTable
+            var table = $('.example').DataTable({
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                language: {
+                    lengthMenu: '_MENU_',
+                    search: '',
+                    searchPlaceholder: "Search for quotation ID, customer..."
+                },
+                responsive: true,
+                dom: 'Blfrtip',
+                buttons: [
+                    {
+                        extend: 'excel',
+                        text: '<i class="fa-solid fa-file-excel"></i> Excel',
+                        className: 'btn btn-success btn-sm'
+                    },
+                    {
+                        extend: 'csv',
+                        text: '<i class="fa-solid fa-file-csv"></i> CSV',
+                        className: 'btn btn-info btn-sm'
+                    },
+                    {
+                        extend: 'pdf',
+                        text: '<i class="fa-solid fa-file-pdf"></i> PDF',
+                        className: 'btn btn-danger btn-sm'
+                    },
+                    {
+                        extend: 'print',
+                        text: '<i class="fa-solid fa-print"></i> Print',
+                        className: 'btn btn-primary btn-sm'
+                    }
+                ],
+                pageLength: 10,
+                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]]
+            });
+
+            // Initialize Bootstrap Select
+            $('.selectpicker').selectpicker();
+
+            // Initialize Date Range Picker
+            $('#daterange').daterangepicker({
+                startDate: moment('2025-04-01'),
+                endDate: moment('2026-03-31'),
+                locale: {
+                    format: 'Do MMM YYYY'
+                }
+            });
+
+            // Initialize Bootstrap Tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+</body>
+
+</html>
