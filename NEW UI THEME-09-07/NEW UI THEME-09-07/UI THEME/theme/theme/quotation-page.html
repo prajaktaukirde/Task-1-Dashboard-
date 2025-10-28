@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Quotations - Demo</title>
+  <!-- Bootstrap (local path kept same as your theme.html expects) -->
+  <link rel="stylesheet" type="text/css" href="../../assets/Bootstrap5/css/bootstrap.css" />
+  <!-- datatables CSS used in theme.html -->
+  <link rel="stylesheet" type="text/css" href="../../assets/datatables/css/datatables.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../assets/datatables/css/jquery.dataTables.min.css" />
+  <link rel="stylesheet" type="text/css" href="../../assets/datatables/css/buttons.dataTables.min.css" />
+  <link rel="stylesheet" href="../../assets/Bootstrap5/css/bootstrap-select.min.css" />
+  <link rel="stylesheet" href="../../assets/css/theme.css" />
+  <link rel="stylesheet" href="../../assets/css/style.css" />
+  <style>
+    /* Minimal page-specific overrides - let theme.css provide core colors */
+    body { background:transparent }
+    .page-header { padding:12px 18px; background:transparent; border:0; margin-bottom:12px }
+    .summary-pills { display:flex; gap:14px; margin:12px 0 20px; }
+    .pill { background:var(--card-bg, #fff); border-radius:6px; padding:10px 16px; box-shadow:0 8px 18px rgba(3,10,51,0.04); display:flex; align-items:center; gap:10px; min-width:180px }
+    .pill .label { font-weight:700 }
+    .pill .num { margin-left:auto; font-weight:700 }
+
+    .table-wrap { background:transparent; border-radius:6px; padding:0 }
+    table.data thead th { background:var(--thead-bg,#f6f8fb); }
+
+    .tags { display:flex; gap:8px; align-items:center; flex-wrap:wrap }
+    .tag { background:var(--tag-bg,#fff); color:var(--tag-color,#495057); padding:5px 10px; border-radius:6px; font-size:0.86rem; border:1px solid var(--tag-border,#d7dbe0) }
+    .status-badge { display:inline-block; padding:4px 10px; border-radius:6px; font-weight:700 }
+
+    .tag-cell { display:flex; justify-content:space-between; align-items:center }
+    .search-input { width:58%; }
+    .expiry { color:var(--danger,#e24b4b); font-weight:700 }
+    @media (max-width:768px){ .search-input{width:100%} .summary-pills{flex-wrap:wrap} }
+  </style>
+</head>
+<body>
+  <div class="container-fluid p-4">
+    <div class="page-header d-flex justify-content-between align-items-center">
+      <div>
+        <button class="btn btn-primary">+ NEW QUOTATION</button>
+      </div>
+      <div>
+        <button class="btn btn-success">Excel Download</button>
+      </div>
+    </div>
+
+    <div class="card p-3 mb-3">
+      <div class="row gy-2 align-items-center filter-row">
+        <div class="col-md-4">
+          <label class="form-label">Date</label>
+          <input class="form-control" value="1st Apr 2025 - 31st Mar 2026">
+        </div>
+        <div class="col-md-4">
+          <label class="form-label">Multiple Filter</label>
+          <select class="form-select"><option>Change...</option></select>
+        </div>
+        <div class="col-md-4 text-end">
+        </div>
+      </div>
+
+      <div class="summary-pills">
+        <div class="pill"><div class="label">Converted To Invoice(5)</div><div class="num">46059</div></div>
+        <div class="pill"><div class="label" style="color:#ff6b6b">Quotation(12)</div><div class="num">56319</div></div>
+        <div class="pill"><div class="label" style="color:#2aa76f">Tax Value(4)</div><div class="num">3364</div></div>
+      </div>
+
+      <div class="mb-2">
+        <input class="form-control search-input" placeholder="Search for order ID, customer, order status or something...">
+      </div>
+
+      <div class="table-wrap">
+        <table class="data table" id="quotesTable">
+          <thead>
+            <tr>
+              <th>Customer Name</th>
+              <th>Quotation ID</th>
+              <th>Sub Total</th>
+              <th>Tax Total</th>
+              <th>Total</th>
+              <th>Date</th>
+              <th>Expiry Date</th>
+              <th>Tags</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Kia</td>
+              <td>QT-0013</td>
+              <td>200</td>
+              <td>10</td>
+              <td>210</td>
+              <td>10/10/2025</td>
+              <td class="expiry">17/10/2025</td>
+              <td class="tag-cell">
+                <div class="left tags">
+                  <span class="tag">Invoiced - INV-0008</span>
+                </div>
+                <div><span class="status-badge">Accepted</span></div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Kia</td>
+              <td>QT-0012</td>
+              <td>1000</td>
+              <td>0</td>
+              <td>1000</td>
+              <td>09/10/2025</td>
+              <td class="expiry">16/10/2025</td>
+              <td class="tag-cell">
+                <div class="left tags">
+                  <span class="tag">Joy</span>
+                  <span class="tag">Invoiced - INV-0009</span>
+                </div>
+                <div><span class="status-badge">Accepted</span></div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Gennie</td>
+              <td>QT-0011</td>
+              <td>2000</td>
+              <td>95</td>
+              <td>2100</td>
+              <td>12/09/2025</td>
+              <td class="expiry">19/09/2025</td>
+              <td class="tag-cell">
+                <div class="left tags">
+                  <span class="tag">Havy</span>
+                  <span class="tag">Invoiced - INV-0010</span>
+                </div>
+                <div><span class="status-badge">Accepted</span></div>
+              </td>
+            </tr>
+
+            <tr>
+              <td>Unlimited</td>
+              <td>QT-0009</td>
+              <td>10</td>
+              <td>0</td>
+              <td>10</td>
+              <td>11/09/2025</td>
+              <td class="expiry">18/09/2025</td>
+              <td class="tag-cell">
+                <div class="left tags"></div>
+                <div></div>
+              </td>
+            </tr>
+
+            <!-- more rows as needed -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="text-muted small">Demo page created from `theme.html` assets. Open in browser to view.</div>
+  </div>
+
+  <!-- DataTables scripts (same as theme.html uses) -->
+  <script type="text/javascript" src="../../assets/js/jquery-3.3.1.js"></script>
+  <script type="text/javascript" src="../../assets/js/jquery.dataTables.min.js"></script>
+  <script type="text/javascript" src="../../assets/js/dataTables.responsive.min.js"></script>
+  <script type="text/javascript" src="../../assets/js/dataTables.buttons.min.js"></script>
+  <script type="text/javascript" src="../../assets/js/datatables.pdfmake.min.js"></script>
+  <script type="text/javascript" src="../../assets/js/datatables.jszip.min.js"></script>
+  <script type="text/javascript" src="../../assets/js/datatables.vfs_fonts.js"></script>
+  <script type="text/javascript" src="../../assets/js/buttons.html5.min.js"></script>
+  <script type="text/javascript" src="../../assets/js/buttons.print.min.js"></script>
+
+  <script>
+    // Initialize DataTable
+    (function(){
+      if (window.jQuery) {
+        $(document).ready(function(){
+          $('#quotesTable').DataTable({
+            pageLength: 50,
+            responsive: true,
+            dom: 'Bfrtip',
+            buttons: [ 'copy', 'csv', 'excel', 'pdf', 'print' ],
+            columnDefs: [ { orderable: true, targets: '_all' } ]
+          });
+        });
+      } else {
+        console.warn('jQuery not loaded - DataTables not initialized');
+      }
+    })();
+  </script>
+
+</body>
+</html>

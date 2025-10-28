@@ -1,0 +1,126 @@
+<link rel="stylesheet" href="newstyle05_07.css">
+<form id="form" action="">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="purchasegrp">
+                <label class="purchaseinfo">Customer Name</label>
+                <input type="text" class="form-control purchaseselects" id="customer-name">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="purchasegrp">
+                <label for="tags" class="purchaseinfo mb-1">Product</label>
+                <div class=" dropdown-with-icon dropdownalignment">
+                    <select class="selectpicker form-control" name="currency">
+                        <option value="36" data-subtext="GHS">GHS</option>
+                        <option value="38" data-subtext="MAD">MAD</option>
+                        <option value="41" data-subtext="¢">GHS</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="purchasegrp">
+                <label class="purchaseinfo">Order Date</label>
+                <input type="date" id="date" class="form-control purchaseselects " />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="purchasegrp">
+                <label class="purchaseinfo">Amount
+                </label>
+                <input type="number" class="form-control purchaseselects">
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="purchasegrp">
+                <label for="tags" class="purchaseinfo mb-1">Payment Method</label>
+                <div class=" dropdown-with-icon dropdownalignment">
+                    <select class="selectpicker form-control" name="currency">
+                        <option value="36" data-subtext="GHS">GHS</option>
+                        <option value="38" data-subtext="MAD">MAD</option>
+                        <option value="41" data-subtext="¢">GHS</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-12">
+            <div class="purchasegrp">
+                <label for="tags" class="purchaseinfo mb-1">Delivery Status</label>
+                <div class=" dropdown-with-icon dropdownalignment">
+                    <select class="selectpicker form-control" name="currency">
+                        <option value="36" data-subtext="GHS">GHS</option>
+                        <option value="38" data-subtext="MAD">MAD</option>
+                        <option value="41" data-subtext="¢">GHS</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+       
+        
+        <div class="col-md-12 blkftr">
+            <div class="modal-footer taskfooter">
+                <button type="button" class="taskclose1 mr-0" data-bs-dismiss="modal">CLOSE</button>
+                <div class="button_su">
+                    <span class="su_button_circle">
+                    </span>
+                    <!-- <button type="submit" class=" button_su_inner tasksave1 orderclr "> -->
+                    <button type="submit" class=" tasksave1 ms-0 tsk-btn-mr-5">
+                        <span class="button_text_container ">
+                            Add Order
+                        </span></button>
+                </div>
+            </div>
+        </div>
+
+        
+    </div>
+</form>
+<!--   show date picker  -->
+<script>
+    document.getElementById('date').addEventListener('click', () =>
+    {
+        if ('showPicker' in HTMLInputElement.prototype)
+        {
+            document.getElementById('date').showPicker();
+        }
+    })
+</script>
+
+<!-- <script>
+    $(".button_su_inner").mouseenter(function (e)
+    {
+        var parentOffset = $(this).offset();
+
+        var relX = e.pageX - parentOffset.left;
+        var relY = e.pageY - parentOffset.top;
+        $(this).prev(".su_button_circle").css({ "left": relX, "top": relY });
+        $(this).prev(".su_button_circle").removeClass("desplode-circle");
+        $(this).prev(".su_button_circle").addClass("explode-circle");
+
+    });
+
+    $(".button_su_inner").mouseleave(function (e)
+    {
+
+        var parentOffset = $(this).offset();
+
+        var relX = e.pageX - parentOffset.left;
+        var relY = e.pageY - parentOffset.top;
+        $(this).prev(".su_button_circle").css({ "left": relX, "top": relY });
+        $(this).prev(".su_button_circle").removeClass("explode-circle");
+        $(this).prev(".su_button_circle").addClass("desplode-circle");
+
+    });
+
+
+
+</script> -->

@@ -1,0 +1,1926 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quotation Dashboard - Hepsiba Pvt Limited</title>
+
+    <!--Bootstrap 5 CSS from CDN-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!--Bootstrap Icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+    <!-- Poppins font used by project theme -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+    <!--jQuery from CDN-->
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+
+    <!--DataTables CSS from CDN-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/2.4.1/css/buttons.bootstrap5.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css" />
+
+    <!--DataTables JS from CDN-->
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.bootstrap5.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/2.4.1/js/buttons.print.min.js"></script>
+
+    <!--Bootstrap 5 JS from CDN-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!--Bootstrap Select from CDN-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/css/bootstrap-select.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-select@1.14.0-beta3/dist/js/bootstrap-select.min.js"></script>
+
+    <!-- Date Range Picker from CDN -->
+    <script src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            /* Very light cool gray with a soft bluish tint */
+            background: #F5F7FB;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            font-size: 14px;
+            color: #333;
+        }
+
+        /* Sidebar Styles */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100vh;
+            width: 280px;
+            background: linear-gradient(180deg, #5a6d9e 0%, #4a5d8a 50%, #3a4d7a 100%);
+            color: white;
+            overflow-y: auto;
+            overflow-x: hidden;
+            z-index: 1000;
+            box-shadow: 3px 0 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        /* Collapsed sidebar for full-width form view */
+        .sidebar.collapsed {
+            width: 60px;
+        }
+        .main-content.sidebar-collapsed {
+            margin-left: 60px;
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 15px;
+            left: 15px;
+            z-index: 1001;
+            background: #4a5d8a;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        /* Responsive Sidebar */
+        @media (max-width: 992px) {
+            .sidebar {
+                left: -280px;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .main-content {
+                margin-left: 0 !important;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .sidebar {
+                width: 100%;
+                left: -100%;
+            }
+
+            .sidebar.active {
+                left: 0;
+            }
+
+            .stats-row {
+                flex-direction: column;
+            }
+
+            .filter-card .row {
+                flex-direction: column;
+            }
+
+            .filter-card .col-auto {
+                width: 100% !important;
+                max-width: 100% !important;
+            }
+        }
+
+        .sidebar-header {
+            padding: 22px 20px;
+            background: rgba(0,0,0,0.15);
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+        }
+
+        .sidebar-header h3 {
+            margin: 0;
+            font-size: 17px;
+            font-weight: 600;
+            color: white;
+            letter-spacing: 0.3px;
+        }
+
+        .sidebar-search input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .sidebar-search input:focus {
+            background: rgba(255,255,255,0.25) !important;
+            color: white;
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(255,255,255,0.3);
+        }
+
+        .sidebar-menu {
+            padding: 0;
+            margin: 10px 0;
+            list-style: none;
+            display: block;
+            visibility: visible;
+        }
+
+        .sidebar-menu > li {
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            display: block;
+            visibility: visible;
+        }
+
+        .sidebar-menu > li > a {
+            display: flex !important;
+            align-items: center;
+            padding: 14px 20px;
+            color: rgba(255,255,255,0.85) !important;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 14px;
+            font-weight: 500;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+            visibility: visible !important;
+        }
+
+        .sidebar-menu > li > a span {
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .sidebar-menu > li > a i.fa:first-child {
+            margin-right: 12px;
+            width: 20px;
+            font-size: 15px;
+            text-align: center;
+        }
+
+        .sidebar-menu > li > a:hover {
+            background: rgba(255,255,255,0.12);
+            color: white;
+        }
+
+        .sidebar-menu .fa-chevron-down {
+            font-size: 11px;
+            margin-left: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .sidebar-submenu {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            background: rgba(0,0,0,0.25);
+            display: none;
+        }
+
+        .sidebar-submenu.show {
+            display: block;
+        }
+
+        .sidebar-submenu li {
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .sidebar-submenu li:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-submenu a {
+            display: flex;
+            align-items: center;
+            padding: 11px 20px 11px 52px;
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            font-size: 13px;
+            transition: all 0.3s ease;
+            font-weight: 400;
+        }
+
+        .sidebar-submenu a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+        }
+
+        .sidebar-submenu a.active {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            font-weight: 500;
+        }
+
+        .sidebar-submenu a i {
+            margin-right: 10px;
+            font-size: 12px;
+        }
+
+        /* Main Content */
+        .main-content {
+            margin-left: 280px;
+            padding: 0;
+            min-height: 100vh;
+            background-color: #F5F7FB;
+            transition: margin-left 0.3s ease;
+        }
+
+        /* Responsive Main Content */
+        @media (max-width: 992px) {
+            .main-content {
+                margin-left: 0;
+            }
+        }
+
+        .top-bar {
+            background: white;
+            padding: 12px 25px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 999;
+        }
+
+        /* small right breadcrumb for Add New Quotation */
+        .top-breadcrumb-compact {
+            display: none;
+            background: transparent;
+            color: #2c3e50;
+            font-weight: 600;
+            font-size: 13px;
+            align-items: center;
+        }
+        .top-breadcrumb-compact i { color:#5a6d9e; margin-right:6px }
+
+        .breadcrumb-custom {
+            background: transparent;
+            padding: 0;
+            margin: 0;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+        }
+
+        .breadcrumb-custom li {
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .breadcrumb-custom a {
+            color: #4a5d8a;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .breadcrumb-custom a:hover {
+            color: #3a4d7a;
+        }
+
+        .breadcrumb-custom .active {
+            color: #2c3e50;
+            font-weight: 600;
+        }
+
+        .content-wrapper {
+            padding: 20px 25px;
+        }
+
+        .action-bar {
+            background: #FFFFFF;
+            padding: 15px 20px;
+            border-radius: 6px;
+            margin-bottom: 18px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        .btn-new-quotation {
+            background: linear-gradient(135deg, #4a5d8a 0%, #3a4d7a 100%);
+            border: none;
+            color: white;
+            padding: 9px 22px;
+            font-size: 13px;
+            font-weight: 600;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(74, 93, 138, 0.3);
+        }
+
+        .btn-new-quotation:hover {
+            background: linear-gradient(135deg, #3a4d7a 0%, #2a3d6a 100%);
+            box-shadow: 0 4px 12px rgba(74, 93, 138, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-new-quotation:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(74, 93, 138, 0.3);
+        }
+
+        .btn-new-quotation i {
+            margin-right: 6px;
+            font-size: 12px;
+        }
+
+        .filter-card {
+            background: #FFFFFF;
+            padding: 18px 20px;
+            border-radius: 6px;
+            margin-bottom: 18px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+        }
+
+        .filter-label {
+            font-size: 12px;
+            color: #555;
+            margin-bottom: 6px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .filter-input,
+        .filter-select {
+            height: 38px;
+            border: 1px solid #d1d5db;
+            border-radius: 5px;
+            font-size: 13px;
+            padding: 0 12px;
+            width: 100%;
+            transition: all 0.3s;
+        }
+
+        .filter-input:focus,
+        .filter-select:focus {
+            border-color: #4a5d8a;
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(74, 93, 138, 0.1);
+        }
+
+        .btn-excel {
+            background: linear-gradient(135deg, #28a745 0%, #20833a 100%);
+            border: none;
+            color: white;
+            font-size: 12px;
+            font-weight: 600;
+            border-radius: 5px;
+            height: 38px;
+            padding: 0 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 8px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-excel:hover {
+            background: linear-gradient(135deg, #20833a 0%, #1a6d2f 100%);
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.4);
+            transform: translateY(-1px);
+        }
+
+        .btn-excel:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 6px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-excel i {
+            margin-right: 6px;
+            font-size: 11px;
+        }
+
+        .stats-row {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            flex: 1;
+            background: #FFFFFF;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            border-left: 4px solid;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+        }
+
+        .stat-card:active {
+            transform: translateY(-1px);
+        }
+
+        .stat-card.orange {
+            border-left-color: #ff9800;
+        }
+
+        .stat-card.red {
+            border-left-color: #f44336;
+        }
+
+        .stat-card.green {
+            border-left-color: #4caf50;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            font-weight: 400;
+            margin-bottom: 8px;
+            color: #666;
+            letter-spacing: 0.3px;
+        }
+
+        .stat-card.orange .stat-label {
+            color: #ff9800;
+        }
+
+        .stat-card.red .stat-label {
+            color: #f44336;
+        }
+
+        .stat-card.green .stat-label {
+            color: #4caf50;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2c3e50;
+            line-height: 1.2;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        .table-wrapper {
+            background: #FFFFFF;
+            border-radius: 6px;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            overflow-x: auto;
+        }
+
+        /* Table Styling */
+        .table-wrapper table {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+            font-size: 13px;
+            color: #333;
+        }
+
+        .table-wrapper thead th {
+            font-weight: 500;
+            font-size: 12px;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .table-wrapper tbody td {
+            font-size: 13px;
+            color: #333;
+            padding: 12px 8px;
+        }
+
+        .table-wrapper tbody td:nth-child(4),
+        .table-wrapper tbody td:nth-child(5),
+        .table-wrapper tbody td:nth-child(6) {
+            font-weight: 500;
+        }
+
+        /* Red expiry dates */
+        .expiry-date {
+            color: #ff5252 !important;
+            font-weight: 400;
+        }
+
+        /* Responsive Table */
+        @media (max-width: 768px) {
+            .table-wrapper {
+                padding: 10px;
+            }
+
+            .table-wrapper table {
+                font-size: 12px;
+            }
+
+            .top-bar {
+                padding: 10px 15px;
+            }
+
+            .content-wrapper {
+                padding: 15px;
+            }
+
+            .action-bar,
+            .filter-card {
+                padding: 12px 15px;
+            }
+        }
+
+        .input-group-text {
+            background-color: white;
+            border-right: none;
+        }
+
+        .input-group .filter-input {
+            border-left: none;
+            padding-left: 0;
+        }
+
+        /* Additional Responsive Styles */
+        @media (max-width: 576px) {
+            .breadcrumb-custom {
+                font-size: 11px;
+            }
+
+            .btn-new-quotation,
+            .btn-excel {
+                font-size: 11px;
+                padding: 8px 16px;
+            }
+
+            .stat-label {
+                font-size: 11px;
+            }
+
+            .stat-value {
+                font-size: 24px;
+            }
+
+            .sidebar-header h3 {
+                font-size: 15px;
+            }
+
+            .sidebar-menu > li > a {
+                font-size: 13px;
+                padding: 12px 15px;
+            }
+
+            .sidebar-submenu a {
+                font-size: 12px;
+                padding: 10px 15px 10px 45px;
+            }
+        }
+
+        /* Print Styles */
+        @media print {
+            .sidebar,
+            .menu-toggle,
+            .top-bar,
+            .action-bar,
+            .filter-card {
+                display: none;
+            }
+
+            .main-content {
+                margin-left: 0;
+            }
+
+            .table-wrapper {
+                box-shadow: none;
+            }
+        }
+
+        .example {
+            width: 100% !important;
+        }
+
+        .dataTables_wrapper .dataTables_length select {
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .dataTables_wrapper .dataTables_filter input {
+            padding: 5px 10px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .header-effect a {
+            margin: 0 5px;
+            cursor: pointer;
+        }
+
+        .header-effect img {
+            transition: transform 0.2s;
+        }
+
+        .header-effect img:hover {
+            transform: scale(1.2);
+        }
+
+        .tag-badge {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .tag-invoiced {
+            background-color: #e3f2fd;
+            color: #1976d2;
+        }
+
+        .tag-accepted {
+            background-color: #e8f5e9;
+            color: #388e3c;
+        }
+
+        .tag-joy {
+            background-color: #fff3e0;
+            color: #f57c00;
+        }
+
+        .tag-havy {
+            background-color: #fce4ec;
+            color: #c2185b;
+        }
+
+        /* Card panel used for the inline Add New Quotation view to match the screenshot */
+        .card-panel {
+            background: #ffffff; /* white rectangle */
+            border-radius: 6px;
+            padding: 20px;
+            border: 1px solid rgba(0,0,0,0.06);
+            box-shadow: 0 6px 18px rgba(38,63,112,0.06);
+            margin-bottom: 18px;
+        }
+
+        .card-panel .section-title {
+            margin: 0;
+            font-size: 16px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+
+        /* Make the compact breadcrumb slightly more prominent and match Sales color */
+        .top-breadcrumb-compact {
+            color: #2c3e50;
+        }
+        .top-breadcrumb-compact i { color: #4a5d8a; }
+
+        /* Advanced options bar with purple circular plus (right) */
+        .adv-panel {
+            background: transparent;
+            border: 1px solid rgba(74,93,138,0.12);
+            border-radius: 4px;
+            padding: 10px 14px;
+            margin-top: 12px;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+        }
+
+        .adv-panel .adv-toggle {
+            background: linear-gradient(135deg,#6c4ea3 0%, #5b3fa0 100%);
+            color: white;
+            border: none;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 3px 8px rgba(91,63,160,0.18);
+            cursor: pointer;
+        }
+
+    .adv-panel .adv-toggle i { margin: 0; }
+
+    /* Theme overrides to match project appearance exactly */
+    body { font-family: 'Poppins', sans-serif !important; font-size:14px; color:#222; background: linear-gradient(180deg,#f3eef8 0%,#f8f8fb 18%,#f6f6f8 100%); }
+    .top-bar { background: linear-gradient(180deg,#e9dbf1 0%, #f3f3f8 100%); padding:10px 25px; box-shadow:0 1px 0 rgba(0,0,0,0.04); }
+    .top-breadcrumb-compact { color:#405189; display:flex; align-items:center; font-weight:600; font-size:13px; }
+    .top-breadcrumb-compact i { color:#405189; margin-right:8px; }
+    .filter-label { font-size:13px; color:#4a4a4a; font-weight:600; margin-bottom:6px; text-transform:none; }
+    .filter-input, .filter-select, .form-control { height:36px; font-size:12px; border:1px solid #ced4da; padding:6px 10px; }
+    .card-panel { padding:22px; }
+    .input-group .form-control { height:36px; padding:6px 10px; }
+    .adv-panel { padding:10px 14px; }
+    .section-title { font-size:15px; font-weight:600; color:#2c3e50; }
+    /* Address style: small label + single-line underline inputs */
+    .address-block { font-size:13px; }
+    .address-block .address-label { font-weight:600; color:#444; margin-bottom:6px; display:block; }
+    .address-block .address-input { border:none; border-bottom:1px solid #d6d6d6; border-radius:0; padding:6px 4px; background:transparent; box-shadow:none; width:100%; }
+    .address-block .address-input:focus { outline:none; border-bottom-color:#bfc9e6; }
+    </style>
+</head>
+
+<body>
+    <!-- Mobile Menu Toggle -->
+    <button class="menu-toggle" onclick="toggleMobileMenu()">
+        <i class="fa fa-bars"></i>
+    </button>
+
+    <!-- Left Sidebar -->
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <h3>Hepsiba Pvt Limited</h3>
+        </div>
+        
+        <!-- Search Bar -->
+        <div class="sidebar-search" style="padding: 15px;">
+            <div class="input-group">
+                <span class="input-group-text" style="background: rgba(255,255,255,0.15); border: none; color: white;">
+                    <i class="fa fa-search"></i>
+                </span>
+                <input type="text" class="form-control" id="sidebarSearch" placeholder="Search menu..." 
+                    style="background: rgba(255,255,255,0.15); border: none; color: white; font-size: 13px;"
+                    onkeyup="searchMenu()">
+            </div>
+        </div>
+
+        <ul class="sidebar-menu">
+            <li>
+                <a href="#">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span>ORDER</span>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-user"></i>
+                    <span>CUSTOMER</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-truck"></i>
+                    <span>VENDOR</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-shopping-bag"></i>
+                    <span>SALES</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+                <ul class="sidebar-submenu show">
+                    <li><a href="#" class="active"><i class="fa fa-file-text-o"></i>Quotation</a></li>
+                    <li><a href="#"><i class="fa fa-file-text"></i>Sales Order</a></li>
+                    <li><a href="#"><i class="fa fa-file-invoice"></i>Pro Forma Invoice</a></li>
+                    <li><a href="#"><i class="fa fa-file-invoice-dollar"></i>Invoice</a></li>
+                    <li><a href="#"><i class="fa fa-credit-card"></i>Payments In</a></li>
+                    <li><a href="#"><i class="fa fa-sticky-note"></i>Credit Notes</a></li>
+                    <li><a href="#"><i class="fa fa-chart-bar"></i>Report</a></li>
+                    <li><a href="#"><i class="fa fa-cog"></i>Settings</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-shopping-basket"></i>
+                    <span>PURCHASE</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+                <ul class="sidebar-submenu">
+                    <li><a href="#"><i class="fa fa-check-circle"></i>Quality</a></li>
+                    <li><a href="#"><i class="fa fa-money-bill-wave"></i>Payments Out</a></li>
+                    <li><a href="#"><i class="fa fa-receipt"></i>Debit Notes</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-users-cog"></i>
+                    <span>MANAGEMENT</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-warehouse"></i>
+                    <span>INVENTORY</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-desktop"></i>
+                    <span>CRM</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-box"></i>
+                    <span>PRODUCTS</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+            </li>
+            <li>
+                <a href="#" onclick="toggleSubmenu(event)">
+                    <i class="fa fa-calculator"></i>
+                    <span>ACCOUNTING</span>
+                    <i class="fa fa-chevron-down"></i>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Top Bar with compact breadcrumb -->
+        <div class="top-bar">
+            <div id="topBreadcrumbCompact" class="top-breadcrumb-compact ms-3">
+                <i class="fa fa-home"></i>
+                <span>SALES &gt; QUOTATION &gt; <strong id="topBreadcrumbActive">NEW QUOTATION</strong></span>
+            </div>
+        </div>
+
+        <!-- Content Wrapper -->
+        <div class="content-wrapper">
+            <!-- Action Bar with NEW QUOTATION Button -->
+            <div class="action-bar">
+                <button type="button" class="btn-new-quotation">
+                    <i class="fa fa-plus"></i>NEW QUOTATION
+                </button>
+            </div>
+
+            <!-- Add New Quotation Modal -->
+            <div class="modal fade" id="quotationModal" tabindex="-1" aria-labelledby="quotationModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl modal-dialog-centered">
+                    <div class="modal-content">
+                        <form id="quotationForm">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="quotationModalLabel">Add New Quotation</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row g-3">
+                                    <div class="col-md-6">
+                                        <label class="filter-label">Customer</label>
+                                        <input type="text" id="customerName" class="form-control filter-input" placeholder="Customer name" required>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="filter-label">Quotation Date</label>
+                                        <input type="date" id="quotationDate" class="form-control filter-input" value="" required>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="filter-label">Expiry Date</label>
+                                        <input type="date" id="expiryDate" class="form-control filter-input">
+                                    </div>
+                                </div>
+
+                                <hr/>
+
+                                <div class="table-responsive">
+                                    <table class="table table-sm" id="itemsTable">
+                                        <thead>
+                                            <tr style="background-color: #F8F9FB; color: #333333; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500;">
+                                                <th style="width:40px">#</th>
+                                                <th style="width:370px">Items</th>
+                                                <th style="width:130px; text-align: center;">HSN / SAC</th>
+                                                <th style="width:120px">Qty (Unit)</th>
+                                                <th style="width:120px; text-align: right;">Unit Price (₹)</th>
+                                                <th style="width:110px">Tax</th>
+                                                <th style="width:150px; text-align: right;">Net Amount (₹)</th>
+                                                <th style="width:50px"></th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr class="item-row" style="height: 60px;">
+                                                <td class="align-middle" style="text-align: center;">1</td>
+                                                <td>
+                                                    <div style="display: flex; align-items: center; margin-bottom: 4px;">
+                                                        <span style="font-size: 12px; color: #666; margin-right: 8px;">Item Name</span>
+                                                        <i class="fa fa-upload" style="color: green; font-size: 16px;"></i>
+                                                    </div>
+                                                    <div style="position: relative; height: 38px;">
+                                                        <input type="text" class="form-control desc" placeholder="Describe Here..." style="padding-left: 30px; padding-right: 30px; height: 100%; border-radius: 6px; padding: 10px;">
+                                                        <i class="fa fa-calendar" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+                                                    </div>
+                                                </td>
+                                                <td class="align-middle" style="text-align: center;">HSN / SAC</td>
+                                                <td class="align-middle">
+                                                    <select class="form-select qty" style="width: 100%;">
+                                                        <option selected>Nothing selected</option>
+                                                        <option value="1">1</option>
+                                                        <option value="2">2</option>
+                                                        <option value="3">3</option>
+                                                        <option value="4">4</option>
+                                                        <option value="5">5</option>
+                                                    </select>
+                                                </td>
+                                                <td class="align-middle" style="text-align: right;"><input type="number" min="0" step="0.01" class="form-control price" placeholder="Rate" style="text-align: right;"></td>
+                                                <td class="align-middle">
+                                                    <select class="form-select tax-select" style="width: 100%;">
+                                                        <option selected>No Tax</option>
+                                                        <option>GST 5%</option>
+                                                        <option>GST 12%</option>
+                                                    </select>
+                                                </td>
+                                                <td class="amount align-middle" style="text-align: right; font-weight: bold;">0.00</td>
+                                                <td class="align-middle text-center"><button type="button" class="btn btn-outline-success btn-sm" style="width: 30px; height: 30px; padding: 0;"><i class="fa fa-check"></i></button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <button type="button" id="addItemBtn" class="btn btn-outline-primary btn-sm">Add Item</button>
+                                    <div style="width: 270px; background: #FAFAFA; border-left: 1px solid #E5E5E5; padding: 20px 24px; font-family: 'Inter', sans-serif; font-size: 14px; color: #333333;">
+                                        <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                            <span>Sub Total :</span>
+                                            <span id="subTotal" style="text-align: right;">₹0.00</span>
+                                        </div>
+                                        <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                            <span>Discount :</span>
+                                            <div style="display: flex; align-items: center; gap: 6px;">
+                                                <input id="discountVal" style="width: 60px; height: 32px; border: 1px solid #E2E5EA; border-radius: 6px; padding: 0 8px;" class="form-control form-control-sm" value="0">
+                                                <select id="discountType" style="width: 120px; height: 32px; border: 1px solid #E2E5EA; border-radius: 6px; padding: 0 8px;" class="form-select form-select-sm">
+                                                    <option value="percent">% (percentage)</option>
+                                                    <option value="fixed">Fixed</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                            <span>Total Tax :</span>
+                                            <span id="taxTotal" style="text-align: right;">+₹0.00</span>
+                                        </div>
+                                        <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                            <span>Adjustment :</span>
+                                            <input id="adjustment" style="width: 100px; height: 32px; border: 1px solid #E2E5EA; border-radius: 6px; padding: 0 8px; text-align: right;" class="form-control form-control-sm" value="0.00">
+                                        </div>
+                                        <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                            <span>Shipping Charges :</span>
+                                            <div style="display: flex; align-items: center;">
+                                                <input id="shipping" style="width: 100px; height: 32px; border: 1px solid #E2E5EA; border-radius: 6px; padding: 0 8px; text-align: right; margin-right: 4px;" class="form-control form-control-sm" value="0.00">
+                                                <i class="fa fa-info-circle" style="color: #999999;"></i>
+                                            </div>
+                                        </div>
+                                        <div style="margin-bottom: 16px;">
+                                            <a href="#" style="color: #007BFF; text-decoration: none; font-size: 13px;">Add Shipping Tax</a>
+                                        </div>
+                                        <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid #E5E5E5;">
+                                            <span style="font-weight: 600; font-size: 16px; color: #333333;">Total :</span>
+                                            <span id="grandTotal" style="font-weight: 600; font-size: 16px; color: #333333; text-align: right;">₹0.00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save Quotation</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Inline full Add New Quotation view (hidden by default) -->
+            <div id="newQuotationView" style="display:none; margin-top:10px;">
+                <div class="card-panel">
+                    <div class="mb-3">
+                        <h5 class="section-title">Add New Quotation</h5>
+                    </div>
+
+                    
+
+                        <!-- Canonical top layout matching screenshot: Customer | Quotation Date | Bill & Ship Addresses | Discount/Tags -->
+                        <div class="row">
+                            <div class="col-lg-3">
+                                <label class="filter-label">Customer <span class="text-danger">*</span></label>
+                                <div class="input-group">
+                                    <select class="form-select filter-select" id="customer_inline">
+                                        <option value="">Select Customer</option>
+                                        <option>Kia</option>
+                                        <option>Gennie</option>
+                                    </select>
+                                    <button class="btn btn-outline-secondary" id="addCustomerInline">+</button>
+                                </div>
+
+                                <div class="mt-3">
+                                    <label class="filter-label">Quotation Number #</label>
+                                    <div class="d-flex">
+                                        <input class="form-control filter-input" style="width:90px" value="QUOT-" readonly>
+                                        <input class="form-control filter-input" value="0120">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <label class="filter-label">Quotation Date</label>
+                                <input type="date" id="quotationDate_inline" class="form-control filter-input">
+
+                                <div class="mt-3">
+                                    <label class="filter-label">Status</label>
+                                    <select class="form-select filter-select" id="status_inline"><option>Select Status</option></select>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <div class="d-flex justify-content-between align-items-start mb-1">
+                                    <div class="address-title"><i class="fa fa-building-o"></i> <strong>Bill Address</strong></div>
+                                    <div class="address-title ms-3"><i class="fa fa-truck"></i> <strong>Ship Address</strong></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-6 address-block">
+                                        <input class="address-input" placeholder="Company">
+                                        <input class="address-input mt-2" placeholder="Street">
+                                        <input class="address-input mt-2" placeholder="City">
+                                        <input class="address-input mt-2" placeholder="Zipcode">
+                                    </div>
+                                    <div class="col-6 address-block">
+                                        <input class="address-input" placeholder="Company">
+                                        <input class="address-input mt-2" placeholder="Street">
+                                        <input class="address-input mt-2" placeholder="City">
+                                        <input class="address-input mt-2" placeholder="Zipcode">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3">
+                                <label class="filter-label">Discount Type</label>
+                                <select class="form-select filter-select" id="discountTypeInlineTop"><option>Select Discount Type</option></select>
+                                <div class="mt-3">
+                                    <label class="filter-label">Tags</label>
+                                    <select class="form-select filter-select" id="tags_inline"><option>Select Tags</option></select>
+                                </div>
+                            </div>
+                        </div>
+
+                    <!-- Third row: To Attend Of | S_number | Email Address -->
+                    <div class="row mt-3">
+                        <div class="col-lg-6">
+                            <label class="filter-label">To Attend Of</label>
+                            <input class="form-control" placeholder="Enter To attend of">
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="filter-label">S_number</label>
+                            <input class="form-control" placeholder="Enter s_number">
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="filter-label">Email Address</label>
+                            <input class="form-control" placeholder="Enter Email Address">
+                        </div>
+                    </div>
+
+                    <div class="mt-3 adv-panel d-flex align-items-center justify-content-between" style="border: 1px solid #800080;">
+                        <strong>Advanced Options</strong>
+                        <button class="btn btn-outline-primary btn-sm" style="border-color: #800080; color: #800080;"><i class="fa fa-plus" style="color: #800080;"></i></button>
+                    </div>
+
+                    <div class="mt-4 table-responsive" style="background-color: #F5F7FB; padding: 20px; margin: -20px;">
+                        <div class="d-flex justify-content-between align-items-center mb-2">
+                            <div class="d-flex align-items-center">
+                                <div style="background-color: #f0f0f0; padding: 12px 20px; border-radius: 4px; color: #666; margin-right: 15px; display: flex; align-items: center; width: 250px;">
+                                    <span>Search Item</span>
+                                </div>
+                                <button class="btn btn-outline-primary btn-sm" style="border-color: #800080; color: #800080;"><i class="fa fa-plus" style="color: #800080;"></i></button>
+                            </div>
+                        </div>
+                        <table class="table table-bordered" id="itemsTableInline" style="background-color: #FFFFFF; box-shadow: 0 0 10px rgba(0,0,0,0.05); font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: #333333; border-color: #E2E5EA;">
+                            <thead>
+                                <tr style="background-color: #F8F9FB; color: #333333;">
+                                    <th style="width:40px">#</th>
+                                    <th style="width:370px">Items</th>
+                                    <th style="width:130px; text-align: center;">HSN / SAC</th>
+                                    <th style="width:120px">Qty (Unit)</th>
+                                    <th style="width:120px; text-align: right;">Unit Price (₹)</th>
+                                    <th style="width:110px">Tax</th>
+                                    <th style="width:150px; text-align: right;">Net Amount (₹)</th>
+                                    <th style="width:50px"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr class="item-row-inline" style="height: 60px;">
+                                    <td class="align-middle" style="text-align: center;">1</td>
+                                    <td>
+                                        <div style="display: flex; align-items: center; margin-bottom: 4px;">
+                                            <span style="font-size: 12px; color: #666; margin-right: 8px;">Item Name</span>
+                                            <i class="fa fa-upload" style="color: green; font-size: 16px;"></i>
+                                        </div>
+                                        <div style="position: relative; height: 38px;">
+                                            <input class="form-control desc-inline" placeholder="Describe Here..." style="padding-left: 30px; padding-right: 30px; height: 100%; border-radius: 6px; padding: 10px;">
+                                            <i class="fa fa-calendar" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+                                        </div>
+                                    </td>
+                                    <td class="align-middle" style="text-align: center;">HSN / SAC</td>
+                                    <td class="align-middle">
+                                        <select class="form-select qty-inline" style="width: 100%;">
+                                            <option selected>Nothing selected</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </td>
+                                    <td class="align-middle" style="text-align: right;"><input class="form-control price-inline" placeholder="Rate" type="text" style="text-align: right;"></td>
+                                    <td class="align-middle">
+                                        <select class="form-select tax-inline" style="width: 100%;">
+                                            <option selected>No Tax</option>
+                                            <option>GST 5%</option>
+                                            <option>GST 12%</option>
+                                        </select>
+                                    </td>
+                                    <td class="align-middle" style="text-align: right; font-weight: bold;">0.00</td>
+                                    <td class="align-middle text-center"><button class="btn btn-outline-success btn-sm" style="width: 30px; height: 30px; padding: 0;"><i class="fa fa-check"></i></button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-lg-9"></div>
+                        <div class="col-lg-3">
+                            <div style="width: 270px; background: #FAFAFA; border-left: 1px solid #E5E5E5; padding: 20px 24px; font-family: 'Inter', sans-serif; font-size: 14px; color: #333333; margin-top: 0;">
+                                <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span>Sub Total :</span>
+                                    <span id="subTotalInline" style="text-align: right;">₹0.00</span>
+                                </div>
+                                <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span>Discount :</span>
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <input id="discountValInline" style="width: 60px; height: 32px; border: 1px solid #E2E5EA; border-radius: 6px; padding: 0 8px;" class="form-control form-control-sm" value="0">
+                                        <select id="discountTypeInline" style="width: 120px; height: 32px; border: 1px solid #E2E5EA; border-radius: 6px; padding: 0 8px;" class="form-select form-select-sm">
+                                            <option value="percent">% (percentage)</option>
+                                            <option value="fixed">Fixed</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span>Total Tax :</span>
+                                    <span id="taxTotalInline" style="text-align: right;">+₹0.00</span>
+                                </div>
+                                <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span>Adjustment :</span>
+                                    <input id="adjustmentInline" style="width: 100px; height: 32px; border: 1px solid #E2E5EA; border-radius: 6px; padding: 0 8px; text-align: right;" class="form-control form-control-sm" value="0.00">
+                                </div>
+                                <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span>Shipping Charges :</span>
+                                    <div style="display: flex; align-items: center;">
+                                        <input id="shippingInline" style="width: 100px; height: 32px; border: 1px solid #E2E5EA; border-radius: 6px; padding: 0 8px; text-align: right; margin-right: 4px;" class="form-control form-control-sm" value="0.00">
+                                        <i class="fa fa-info-circle" style="color: #999999;"></i>
+                                    </div>
+                                </div>
+                                <div style="margin-bottom: 16px;">
+                                    <a href="#" style="color: #007BFF; text-decoration: none; font-size: 13px;">Add Shipping Tax</a>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid #E5E5E5;">
+                                    <span style="font-weight: 600; font-size: 16px; color: #333333;">Total :</span>
+                                    <span id="grandTotalInline" style="font-weight: 600; font-size: 16px; color: #333333; text-align: right;">₹0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background-color: #F8F9FB; padding: 20px 0; margin: 20px 0;">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-lg-6" style="padding: 0 12px;">
+                                    <label style="font-weight: bold; color: #1E1E1E; margin-bottom: 8px; display: block;">Customer Note</label>
+                                    <textarea class="form-control" style="background: #FFFFFF; border: 1px solid #E5E5E5; border-radius: 6px; padding: 12px; height: 80px; box-shadow: none;" placeholder="hi this is Erp software"></textarea>
+                                </div>
+                                <div class="col-lg-6" style="padding: 0 12px;">
+                                    <label style="font-weight: bold; color: #1E1E1E; margin-bottom: 8px; display: block;">Terms & Conditions</label>
+                                    <textarea class="form-control" style="background: #FFFFFF; border: 1px solid #E5E5E5; border-radius: 6px; padding: 12px; height: 80px; box-shadow: none;" placeholder="Please Enter Terms And Conditions Here"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 d-flex justify-content-end">
+                        <button id="closeInlineQuotationBottom" style="background: #E5E7EB; color: #333; border-radius: 6px; padding: 10px 18px; margin-right: 8px; border: none;">CLOSE</button>
+                        <button id="saveInlineQuotationBottom" style="background: #0FB36E; color: white; border-radius: 6px; padding: 10px 22px; border: none;">SAVE</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+            <!-- Filter Section -->
+            <div class="filter-card">
+                <div class="row g-2 align-items-end" style="flex-wrap: nowrap; overflow-x: auto;">
+                    <div class="col-auto" style="min-width: 250px; max-width: 280px;">
+                        <label class="filter-label">Date</label>
+                        <div class="input-group">
+                            <span class="input-group-text"><i class="bi bi-calendar3"></i></span>
+                            <input type="text" id="daterange" class="form-control filter-input"
+                                value="1st Apr 2025 - 31st Mar 2026" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-auto" style="min-width: 180px; max-width: 220px;">
+                        <label class="filter-label">Multiple Filter</label>
+                        <select class="form-select filter-select">
+                            <option selected>Change...</option>
+                            <option>Customer</option>
+                            <option>Quotation ID</option>
+                            <option>Status</option>
+                        </select>
+                    </div>
+
+                    <div class="col-auto" style="min-width: 180px; max-width: 220px;">
+                        <label class="filter-label">Zone/Region</label>
+                        <select class="form-select filter-select">
+                            <option selected>Select Zone/Region</option>
+                            <option>North</option>
+                            <option>South</option>
+                            <option>East</option>
+                            <option>West</option>
+                        </select>
+                    </div>
+
+                    <div class="col-auto">
+                        <button type="button" class="btn-excel">
+                            <i class="fa fa-download"></i>Excel Download
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistics Cards -->
+            <div class="stats-row">
+                <div class="stat-card orange">
+                    <div class="stat-label">Converted To Invoice(5)</div>
+                    <div class="stat-value">46059</div>
+                </div>
+                <div class="stat-card red">
+                    <div class="stat-label">Quotation(12)</div>
+                    <div class="stat-value">56319</div>
+                </div>
+                <div class="stat-card green">
+                    <div class="stat-label">Tax Value(4)</div>
+                    <div class="stat-value">3364</div>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="table-wrapper">
+                <div class="demo-html mt-0">
+                    <table class="example display dataTable display responsive nowrap tblalign table borderless" id="example">
+                        <thead class="theadrow">
+                            <tr>
+                                <th><input type="checkbox" id="all_check"></th>
+                                <th>S.No</th>
+                                <th>Customer Name</th>
+                                <th>Quotation ID</th>
+                                <th>Sub Total</th>
+                                <th>Tax Total</th>
+                                <th>Total</th>
+                                <th>Date</th>
+                                <th>Expiry Date</th>
+                                <th>Tags</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="row-hover">
+                                <td class="progtble"><input type="checkbox" class="single_check"></td>
+                                <td>01</td>
+                                <td class="hrtble1">
+                                    <a href="#" class=""><span class="viewbtn">Kia</span></a>
+                                    <p class="header-effect">
+                                        <a onclick="toggleViews(1)" data-bs-toggle="tooltip" data-bs-title="view">
+                                            <img src="../../assets/img/view.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="edit">
+                                            <img src="../../assets/img/edit.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="delete">
+                                            <img src="../../assets/img/delete.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                    </p>
+                                    <div class="dropdown">
+                                        <button type="button" data-bs-toggle="dropdown" aria-expanded="false" id="three-dots">
+                                            <img src="../../assets/img/3-vertical-dots-icon.svg" height="15px" width="15px" alt="three-dots" data-bs-toggle="tooltip" data-bs-title="more">
+                                        </button>
+                                        <ul class="dropdown-menu dropshow three-dots-ul">
+                                            <li><a class="dropdown-item" href="#">Not Started</a></li>
+                                            <li><a class="dropdown-item" href="#">Testing</a></li>
+                                            <li><a class="dropdown-item" href="#">Awaiting Feedback</a></li>
+                                            <li><a class="dropdown-item" href="#">Complete</a></li>
+                                        </ul>
+                                    </div>
+                                </td>
+                                <td>QT-0013</td>
+                                <td>200</td>
+                                <td>10</td>
+                                <td>210</td>
+                                <td>10/10/2025</td>
+                                <td class="expiry-date">17/10/2025</td>
+                                <td>
+                                    <span class="tags">
+                                        <span class="tag">Invoiced</span>
+                                    </span>
+                                </td>
+                                <td><span class="approvedbtn">Accepted</span></td>
+                            </tr>
+                            <tr class="row-hover">
+                                <td class="progtble"><input type="checkbox" class="single_check"></td>
+                                <td>02</td>
+                                <td class="hrtble1">
+                                    <a href="#" class=""><span class="viewbtn">Kia</span></a>
+                                    <p class="header-effect">
+                                        <a onclick="toggleViews(1)" data-bs-toggle="tooltip" data-bs-title="view">
+                                            <img src="../../assets/img/view.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="edit">
+                                            <img src="../../assets/img/edit.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="delete">
+                                            <img src="../../assets/img/delete.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                    </p>
+                                </td>
+                                <td>QT-0012</td>
+                                <td>1000</td>
+                                <td>0</td>
+                                <td>1000</td>
+                                <td>09/10/2025</td>
+                                <td class="expiry-date">16/10/2025</td>
+                                <td>
+                                    <span class="tags">
+                                        <span class="tag">Invoiced - INV-0008</span>
+                                        <span class="tag">Accepted</span>
+                                    </span>
+                                </td>
+                                <td><span class="approvedbtn">Accepted</span></td>
+                            </tr>
+                            <tr class="row-hover">
+                                <td class="progtble"><input type="checkbox" class="single_check"></td>
+                                <td>03</td>
+                                <td class="hrtble1">
+                                    <a href="#" class=""><span class="viewbtn">Gennie</span></a>
+                                    <p class="header-effect">
+                                        <a onclick="toggleViews(1)" data-bs-toggle="tooltip" data-bs-title="view">
+                                            <img src="../../assets/img/view.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="edit">
+                                            <img src="../../assets/img/edit.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="delete">
+                                            <img src="../../assets/img/delete.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                    </p>
+                                </td>
+                                <td>QT-0011</td>
+                                <td>2000</td>
+                                <td>95</td>
+                                <td>2100</td>
+                                <td>12/09/2025</td>
+                                <td class="expiry-date">19/09/2025</td>
+              
+                                <td>
+                                    <span class="tags">
+                                        <span class="tag">Joy</span>
+                                        <span class="tag">Invoiced - INV-0009</span>
+                                        <span class="tag">Accepted</span>
+                                    </span>
+                                </td>
+                                <td><span class="approvedbtn">Accepted</span></td>
+                            </tr>
+                            <tr class="row-hover">
+                                <td class="progtble"><input type="checkbox" class="single_check"></td>
+                                <td>04</td>
+                                <td class="hrtble1">
+                                    <a href="#" class=""><span class="viewbtn">Loyal</span></a>
+                                    <p class="header-effect">
+                                        <a onclick="toggleViews(1)" data-bs-toggle="tooltip" data-bs-title="view">
+                                            <img src="../../assets/img/view.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="edit">
+                                            <img src="../../assets/img/edit.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="delete">
+                                            <img src="../../assets/img/delete.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                    </p>
+                                </td>
+                                <td>QT-0010</td>
+                                <td>20</td>
+                                <td>0</td>
+                                <td>20</td>
+                                <td>11/09/2025</td>
+                                <td class="expiry-date">18/09/2025</td>
+                                <td>
+                                    <span class="tags">
+                                        <span class="tag">Havy</span>
+                                        <span class="tag">Invoiced - INV-0010</span>
+                                    </span>
+                                </td>
+                                <td><span class="approvedbtn">Accepted</span></td>
+                            </tr>
+                            <tr class="row-hover">
+                                <td class="progtble"><input type="checkbox" class="single_check"></td>
+                                <td>05</td>
+                                <td class="hrtble1">
+                                    <a href="#" class=""><span class="viewbtn">Unilimited</span></a>
+                                    <p class="header-effect">
+                                        <a onclick="toggleViews(1)" data-bs-toggle="tooltip" data-bs-title="view">
+                                            <img src="../../assets/img/view.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="edit">
+                                            <img src="../../assets/img/edit.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                        <a href="#" data-bs-toggle="tooltip" data-bs-title="delete">
+                                            <img src="../../assets/img/delete.svg" height="15px" width="15px" alt="">
+                                        </a>
+                                    </p>
+                                </td>
+                                <td>QT-0009</td>
+                                <td>10</td>
+                                <td>0</td>
+                                <td>10</td>
+                                <td>11/09/2025</td>
+                                <td class="expiry-date">18/09/2025</td>
+                                <td></td>
+                                <td><span class="draft_label">Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('active');
+        }
+
+        // Close sidebar when clicking outside on mobile
+        document.addEventListener('click', function(event) {
+            const sidebar = document.getElementById('sidebar');
+            const menuToggle = document.querySelector('.menu-toggle');
+            
+            if (window.innerWidth <= 992) {
+                if (!sidebar.contains(event.target) && !menuToggle.contains(event.target)) {
+                    sidebar.classList.remove('active');
+                }
+            }
+        });
+
+        // Sidebar submenu toggle
+        function toggleSubmenu(event) {
+            event.preventDefault();
+            event.stopPropagation();
+            const parent = event.currentTarget.parentElement;
+            const submenu = parent.querySelector('.sidebar-submenu');
+            if (submenu) {
+                submenu.classList.toggle('show');
+                const icon = event.currentTarget.querySelector('.fa-chevron-down');
+                if (icon) {
+                    icon.style.transform = submenu.classList.contains('show') ? 'rotate(180deg)' : 'rotate(0deg)';
+                }
+            }
+        }
+
+        // Search menu functionality
+        function searchMenu() {
+            const searchInput = document.getElementById('sidebarSearch').value.toLowerCase();
+            const menuItems = document.querySelectorAll('.sidebar-menu > li');
+            
+            menuItems.forEach(item => {
+                const menuText = item.textContent.toLowerCase();
+                const submenuItems = item.querySelectorAll('.sidebar-submenu li');
+                let hasMatch = false;
+                
+                // Check main menu item
+                if (menuText.includes(searchInput)) {
+                    item.style.display = '';
+                    hasMatch = true;
+                    
+                    // Show submenu if search matches
+                    const submenu = item.querySelector('.sidebar-submenu');
+                    if (submenu && searchInput !== '') {
+                        submenu.classList.add('show');
+                    }
+                } else {
+                    item.style.display = 'none';
+                }
+                
+                // Check submenu items
+                submenuItems.forEach(subItem => {
+                    const subText = subItem.textContent.toLowerCase();
+                    if (subText.includes(searchInput)) {
+                        item.style.display = '';
+                        subItem.style.display = '';
+                        hasMatch = true;
+                        
+                        // Show parent submenu
+                        const submenu = item.querySelector('.sidebar-submenu');
+                        if (submenu) {
+                            submenu.classList.add('show');
+                        }
+                    } else if (searchInput !== '') {
+                        subItem.style.display = 'none';
+                    } else {
+                        subItem.style.display = '';
+                    }
+                });
+                
+                // Reset display if search is empty
+                if (searchInput === '') {
+                    item.style.display = '';
+                    submenuItems.forEach(subItem => {
+                        subItem.style.display = '';
+                    });
+                }
+            });
+        }
+
+        // Add active state to menu items on click
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuLinks = document.querySelectorAll('.sidebar-submenu a');
+            menuLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Remove active class from all links
+                    menuLinks.forEach(l => l.classList.remove('active'));
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                });
+            });
+        });
+
+        // Make buttons interactive
+        document.addEventListener('DOMContentLoaded', function() {
+            // NEW QUOTATION button - show inline Add New Quotation view
+            const newQuotationBtn = document.querySelector('.btn-new-quotation');
+            const newQuotationView = document.getElementById('newQuotationView');
+            const breadcrumbActive = document.querySelector('.breadcrumb-custom .active');
+            const leftBreadcrumb = document.querySelector('.breadcrumb-custom');
+            if (newQuotationBtn && newQuotationView) {
+                newQuotationBtn.addEventListener('click', function() {
+                    // hide listing UI elements for Add New Quotation view
+                    var toHide = document.querySelectorAll('.filter-card, .stats-row, .table-wrapper');
+                    toHide.forEach(function(el){ el.style.display = 'none'; });
+                    // hide action bar so only the form is visible
+                    var actionBar = document.querySelector('.action-bar'); if(actionBar) actionBar.style.display = 'none';
+                    // collapse sidebar to a narrow bar
+                    var sidebar = document.getElementById('sidebar'); if(sidebar) sidebar.classList.add('collapsed');
+                    var main = document.querySelector('.main-content'); if(main) main.classList.add('sidebar-collapsed');
+
+                    // hide left breadcrumb to avoid duplicate
+                    if(leftBreadcrumb) leftBreadcrumb.style.display = 'none';
+                    // show inline view (full-page like screenshot)
+                    newQuotationView.style.display = '';
+                    // show compact breadcrumb
+                    var topCrumb = document.getElementById('topBreadcrumbCompact'); if(topCrumb) topCrumb.style.display = 'flex';
+                    // scroll to view
+                    newQuotationView.scrollIntoView({behavior:'smooth'});
+                    // compact breadcrumb handles the label
+                });
+            }
+
+            // inline view handlers
+            const closeInlineBtn = document.getElementById('closeInlineQuotation');
+            const saveInlineBtn = document.getElementById('saveInlineQuotation');
+            if (closeInlineBtn) {
+                closeInlineBtn.addEventListener('click', function(){
+                    // hide inline view and restore listing UI
+                    newQuotationView.style.display = 'none';
+                    // restore left breadcrumb
+                    if(leftBreadcrumb) leftBreadcrumb.style.display = '';
+                    // hide compact breadcrumb
+                    var topCrumb = document.getElementById('topBreadcrumbCompact'); if(topCrumb) topCrumb.style.display = 'none';
+                    var toShow = document.querySelectorAll('.filter-card, .stats-row, .table-wrapper');
+                    toShow.forEach(function(el){ el.style.display = ''; });
+                    var actionBar = document.querySelector('.action-bar'); if(actionBar) actionBar.style.display = '';
+                    // restore sidebar
+                    var sidebar = document.getElementById('sidebar'); if(sidebar) sidebar.classList.remove('collapsed');
+                    var main = document.querySelector('.main-content'); if(main) main.classList.remove('sidebar-collapsed');
+                    // left breadcrumb not used; compact breadcrumb handles labels
+                });
+            }
+            if (saveInlineBtn) {
+                saveInlineBtn.addEventListener('click', function(){
+                    alert('Quotation saved (demo)');
+                    // close inline and restore listing UI
+                    newQuotationView.style.display = 'none';
+                    // restore left breadcrumb
+                    if(leftBreadcrumb) leftBreadcrumb.style.display = '';
+                    // hide compact breadcrumb
+                    var topCrumb = document.getElementById('topBreadcrumbCompact'); if(topCrumb) topCrumb.style.display = 'none';
+                    var toShow = document.querySelectorAll('.filter-card, .stats-row, .table-wrapper');
+                    toShow.forEach(function(el){ el.style.display = ''; });
+                    var actionBar = document.querySelector('.action-bar'); if(actionBar) actionBar.style.display = '';
+                    // restore sidebar
+                    var sidebar = document.getElementById('sidebar'); if(sidebar) sidebar.classList.remove('collapsed');
+                    var main = document.querySelector('.main-content'); if(main) main.classList.remove('sidebar-collapsed');
+                    // left breadcrumb not used; compact breadcrumb handles labels
+                });
+            }
+            // bottom buttons
+            var closeInlineBottom = document.getElementById('closeInlineQuotationBottom');
+            var saveInlineBottom = document.getElementById('saveInlineQuotationBottom');
+            if(closeInlineBottom){ closeInlineBottom.addEventListener('click', function(){ newQuotationView.style.display='none'; var toShow=document.querySelectorAll('.filter-card, .stats-row, .table-wrapper'); toShow.forEach(function(el){el.style.display='';}); var actionBar=document.querySelector('.action-bar'); if(actionBar) actionBar.style.display=''; var sidebar=document.getElementById('sidebar'); if(sidebar) sidebar.classList.remove('collapsed'); var main=document.querySelector('.main-content'); if(main) main.classList.remove('sidebar-collapsed'); if(breadcrumbActive) breadcrumbActive.textContent='QUOTATION'; }); }
+            if(saveInlineBottom){ saveInlineBottom.addEventListener('click', function(){ alert('Quotation saved (demo)'); newQuotationView.style.display='none'; var toShow=document.querySelectorAll('.filter-card, .stats-row, .table-wrapper'); toShow.forEach(function(el){el.style.display='';}); var actionBar=document.querySelector('.action-bar'); if(actionBar) actionBar.style.display=''; var sidebar=document.getElementById('sidebar'); if(sidebar) sidebar.classList.remove('collapsed'); var main=document.querySelector('.main-content'); if(main) main.classList.remove('sidebar-collapsed'); if(breadcrumbActive) breadcrumbActive.textContent='QUOTATION'; }); }
+
+            // wire discount/adjust/shipping to totals
+            ['discountValInline','discountTypeInline','adjustmentInline','shippingInline'].forEach(function(id){ var el=document.getElementById(id); if(el) el.addEventListener('input', recalcInlineTotals); });
+
+            // Inline items functionality
+            function parseNumber(v){var n=parseFloat(v);return isNaN(n)?0:n}
+            function recalcInlineRow(row){
+                var qty=parseNumber(row.querySelector('.qty-inline').value);
+                var price=parseNumber(row.querySelector('.price-inline').value);
+                var taxSel=row.querySelector('.tax-inline');
+                var taxPct=0; if(taxSel){if(taxSel.value.indexOf('5')>-1)taxPct=5; if(taxSel.value.indexOf('12')>-1)taxPct=12}
+                var amt = qty*price; var tax=amt*(taxPct/100);
+                row.querySelector('.amount-inline').textContent = (amt+tax).toFixed(2);
+            }
+            function recalcInlineTotals(){
+                var rows=document.querySelectorAll('#itemsTableInline .item-row-inline');
+                var sub=0, taxTotal=0;
+                rows.forEach(function(r){var q=parseNumber(r.querySelector('.qty-inline').value);var p=parseNumber(r.querySelector('.price-inline').value);var a=q*p;sub+=a;var sel=r.querySelector('.tax-inline');var tp=0;if(sel){if(sel.value.indexOf('5')>-1)tp=5;if(sel.value.indexOf('12')>-1)tp=12}taxTotal+=a*(tp/100);});
+                document.getElementById('subTotalInline').textContent = '₹'+sub.toFixed(2);
+                document.getElementById('taxTotalInline').textContent = '+₹'+taxTotal.toFixed(2);
+                var disc = parseNumber(document.getElementById('discountValInline').value);
+                var discType = document.getElementById('discountTypeInline').value;
+                var discAmt = discType==='percent' ? sub*(disc/100) : disc;
+                var adjust = parseNumber(document.getElementById('adjustmentInline').value);
+                var ship = parseNumber(document.getElementById('shippingInline').value);
+                var grand = sub - discAmt + taxTotal + adjust + ship;
+                document.getElementById('grandTotalInline').textContent = '₹'+grand.toFixed(2);
+            }
+            // bind events
+            document.getElementById('newQuotationView').addEventListener('input', function(e){
+                if(e.target.matches('.qty-inline')||e.target.matches('.price-inline')||e.target.matches('.tax-inline')){
+                    var row = e.target.closest('.item-row-inline'); if(row){recalcInlineRow(row); recalcInlineTotals();}
+                }
+            });
+            document.getElementById('itemsTableInline').addEventListener('click', function(e){
+                if(e.target.closest('.remove-inline')){
+                    var row = e.target.closest('.item-row-inline');
+                    var tbody = document.querySelector('#itemsTableInline tbody');
+                    if(tbody.querySelectorAll('.item-row-inline').length>1){ row.remove(); recalcInlineTotals(); } else { row.querySelector('.desc-inline').value=''; row.querySelector('.qty-inline').value=1; row.querySelector('.price-inline').value='0.00'; recalcInlineRow(row); recalcInlineTotals(); }
+                }
+            });
+            document.getElementById('addItemInline').addEventListener('click', function(){
+                var tbody=document.querySelector('#itemsTableInline tbody'); var newRow=document.createElement('tr'); newRow.className='item-row-inline'; newRow.style.height='60px'; newRow.innerHTML='<td class="align-middle" style="text-align: center;">'+ (tbody.children.length+1) +'</td><td><div style="display: flex; align-items: center; margin-bottom: 4px;"><span style="font-size: 12px; color: #666; margin-right: 8px;">Item Name</span><i class="fa fa-upload" style="color: green; font-size: 16px;"></i></div><div style="position: relative; height: 38px;"><input class="form-control desc-inline" placeholder="Describe Here..." style="padding-left: 30px; padding-right: 30px; height: 100%; border-radius: 6px; padding: 10px;"><i class="fa fa-calendar" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i></div></td><td class="align-middle" style="text-align: center;">HSN / SAC</td><td class="align-middle"><select class="form-select qty-inline" style="width: 100%;"><option selected>Nothing selected</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td><td class="align-middle" style="text-align: right;"><input class="form-control price-inline" placeholder="Rate" type="text" style="text-align: right;"></td><td class="align-middle"><select class="form-select tax-inline" style="width: 100%;"><option selected>No Tax</option><option>GST 5%</option><option>GST 12%</option></select></td><td class="amount-inline align-middle" style="text-align: right; font-weight: bold;">0.00</td><td class="align-middle text-center"><button class="btn btn-outline-success btn-sm" style="width: 30px; height: 30px; padding: 0;"><i class="fa fa-check"></i></button></td>'; tbody.appendChild(newRow); recalcInlineTotals(); });
+            // initial inline totals
+            if(document.querySelectorAll('#itemsTableInline .item-row-inline').length>0){ document.querySelectorAll('#itemsTableInline .item-row-inline').forEach(function(r){ recalcInlineRow(r); }); recalcInlineTotals(); }
+
+            // Excel Download button
+            const excelBtn = document.querySelector('.btn-excel');
+            if (excelBtn) {
+                excelBtn.addEventListener('click', function() {
+                    alert('Excel download will start');
+                });
+            }
+        });
+
+        // Quotation modal behavior: add/remove items & totals
+        (function () {
+            function parseNumber(v){
+                var n = parseFloat(v);
+                return isNaN(n)?0:n;
+            }
+
+            function recalcRow($row){
+                var qty = parseNumber($row.querySelector('.qty').value);
+                var price = parseNumber($row.querySelector('.price').value);
+                var taxSel = $row.querySelector('.tax-select');
+                var taxPct = 0;
+                if(taxSel){
+                    if(taxSel.value.indexOf('5')>-1) taxPct = 5;
+                    if(taxSel.value.indexOf('12')>-1) taxPct = 12;
+                }
+                var amt = qty * price;
+                var tax = amt * (taxPct/100);
+                $row.querySelector('.amount').textContent = (amt + tax).toFixed(2);
+            }
+
+            function recalcTotals(){
+                var rows = document.querySelectorAll('#itemsTable tbody .item-row');
+                var sub = 0;
+                var taxTotal = 0;
+                rows.forEach(function(r){
+                    var qty = parseNumber(r.querySelector('.qty').value);
+                    var price = parseNumber(r.querySelector('.price').value);
+                    var amt = qty * price;
+                    sub += amt;
+                    var sel = r.querySelector('.tax-select');
+                    var tp = 0;
+                    if(sel){
+                        if(sel.value.indexOf('5')>-1) tp = 5;
+                        if(sel.value.indexOf('12')>-1) tp = 12;
+                    }
+                    taxTotal += amt * (tp/100);
+                });
+                document.getElementById('subTotal').textContent = '₹'+sub.toFixed(2);
+                document.getElementById('taxTotal').textContent = '+₹'+taxTotal.toFixed(2);
+                var disc = parseNumber(document.getElementById('discountVal').value);
+                var discType = document.getElementById('discountType').value;
+                var discAmt = discType==='percent' ? sub*(disc/100) : disc;
+                var adjust = parseNumber(document.getElementById('adjustment').value);
+                var ship = parseNumber(document.getElementById('shipping').value);
+                var grand = sub - discAmt + taxTotal + adjust + ship;
+                document.getElementById('grandTotal').textContent = '₹'+grand.toFixed(2);
+            }
+
+            function bindRowEvents(row){
+                row.querySelector('.qty').addEventListener('input', function(){ recalcRow(row); recalcTotals(); });
+                row.querySelector('.price').addEventListener('input', function(){ recalcRow(row); recalcTotals(); });
+                var taxSel = row.querySelector('.tax-select');
+                if(taxSel){
+                    taxSel.addEventListener('input', function(){ recalcRow(row); recalcTotals(); });
+                }
+                var removeBtn = row.querySelector('.remove-row');
+                removeBtn.addEventListener('click', function(){
+                    var tbody = document.querySelector('#itemsTable tbody');
+                    if(tbody.querySelectorAll('.item-row').length>1){
+                        row.remove(); recalcTotals();
+                    } else {
+                        // clear values instead
+                        row.querySelector('.desc').value = '';
+                        row.querySelector('.qty').value = 1;
+                        row.querySelector('.price').value = '0.00';
+                        recalcRow(row); recalcTotals();
+                    }
+                });
+            }
+
+            document.getElementById('addItemBtn').addEventListener('click', function(){
+                var tbody = document.querySelector('#itemsTable tbody');
+                var newRow = document.createElement('tr'); newRow.className='item-row';
+                newRow.style.height='60px';
+                newRow.innerHTML = '<td class="align-middle" style="text-align: center;">'+ (tbody.children.length+1) +'</td>'+ 
+                '<td>'+ 
+                    '<div style="display: flex; align-items: center; margin-bottom: 4px;">'+ 
+                        '<span style="font-size: 12px; color: #666; margin-right: 8px;">Item Name</span>'+ 
+                        '<i class="fa fa-upload" style="color: green; font-size: 16px;"></i>'+ 
+                    '</div>'+ 
+                    '<div style="position: relative; height: 38px;">'+
+                        '<input type="text" class="form-control desc" placeholder="Describe Here..." style="padding-left: 30px; padding-right: 30px; height: 100%; border-radius: 6px; padding: 10px;">'+ 
+                        '<i class="fa fa-calendar" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #999;">'+ 
+                    '</i></div>'+ 
+                '</td>'+ 
+                '<td class="align-middle" style="text-align: center;">HSN / SAC</td>'+ 
+                '<td class="align-middle"><select class="form-select qty" style="width: 100%;"><option selected>Nothing selected</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td>'+ 
+                '<td class="align-middle" style="text-align: right;"><input type="number" min="0" step="0.01" class="form-control price" placeholder="Rate" style="text-align: right;"></td>'+ 
+                '<td class="align-middle"><select class="form-select tax-select" style="width: 100%;"><option selected>No Tax</option><option>GST 5%</option><option>GST 12%</option></select></td>'+ 
+                '<td class="amount align-middle" style="text-align: right; font-weight: bold;">0.00</td>'+ 
+                '<td class="align-middle text-center"><button type="button" class="btn btn-outline-success btn-sm" style="width: 30px; height: 30px; padding: 0;"><i class="fa fa-check"></i></button></td>';
+                tbody.appendChild(newRow);
+                bindRowEvents(newRow);
+                recalcTotals();
+            });
+
+            // initial bind existing row
+            document.querySelectorAll('#itemsTable tbody .item-row').forEach(function(r){ bindRowEvents(r); recalcRow(r); });
+            // wire discount/adjust/shipping to totals
+            ['discountVal','discountType','adjustment','shipping'].forEach(function(id){ var el=document.getElementById(id); if(el) el.addEventListener('input', recalcTotals); });
+
+            // Form submit - simple validation & demo behavior
+            document.getElementById('quotationForm').addEventListener('submit', function(e){
+                e.preventDefault();
+                var cust = document.getElementById('customerName').value.trim();
+                if(!cust){ alert('Please enter customer name'); return; }
+                // Collect minimal data
+                var data = {
+                    customer: cust,
+                    date: document.getElementById('quotationDate').value,
+                    expiry: document.getElementById('expiryDate').value,
+                    subtotal: document.getElementById('subTotal').textContent,
+                    tax: document.getElementById('taxTotal').textContent,
+                    total: document.getElementById('grandTotal').textContent,
+                    items: []
+                };
+                document.querySelectorAll('#itemsTable tbody .item-row').forEach(function(r){
+                    data.items.push({desc: r.querySelector('.desc').value, qty: r.querySelector('.qty').value, price: r.querySelector('.price').value, amount: r.querySelector('.amount').textContent});
+                });
+
+                // For now, close modal and show summary alert (replace with real save in production)
+                var modalEl = document.getElementById('quotationModal');
+                var modalInstance = bootstrap.Modal.getInstance(modalEl);
+                if(modalInstance) modalInstance.hide();
+                alert('Quotation saved (demo)\nCustomer: '+data.customer+'\nTotal: '+data.total);
+
+                // Reset form for next use
+                document.getElementById('quotationForm').reset();
+                // reset amounts
+                document.querySelectorAll('#itemsTable tbody .item-row .amount').forEach(function(a){ a.textContent='0.00'; });
+                recalcTotals();
+            });
+        })();
+
+        $(document).ready(function () {
+            // Initialize DataTable
+            var table = $('.example').DataTable({
+                rowReorder: {
+                    selector: 'td:nth-child(2)'
+                },
+                language: {
+                    lengthMenu: '_MENU_',
+                    search: '',
+                    searchPlaceholder: "Search for quotation ID, customer..."
+                },
+                responsive: true,
+                dom: 'Blfrtip',
+                buttons: [
+                    {
+                        extend: 'excel',
+                        text: '<i class="fa-solid fa-file-excel"></i> Excel',
+                        className: 'btn btn-success btn-sm'
+                    },
+                    {
+                        extend: 'csv',
+                        text: '<i class="fa-solid fa-file-csv"></i> CSV',
+                        className: 'btn btn-info btn-sm'
+                    },
+                    {
+                        extend: 'pdf',
+                        text: '<i class="fa-solid fa-file-pdf"></i> PDF',
+                        className: 'btn btn-danger btn-sm'
+                    },
+                    {
+                        extend: 'print',
+                        text: '<i class="fa-solid fa-print"></i> Print',
+                        className: 'btn btn-primary btn-sm'
+                    }
+                ],
+                pageLength: 10,
+                lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "All"]]
+            });
+
+            // Initialize Bootstrap Select
+            $('.selectpicker').selectpicker();
+
+            // Initialize Date Range Picker
+            $('#daterange').daterangepicker({
+                startDate: moment('2025-04-01'),
+                endDate: moment('2026-03-31'),
+                locale: {
+                    format: 'Do MMM YYYY'
+                }
+            });
+
+            // Initialize Bootstrap Tooltips
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+        });
+    </script>
+</body>
+
+</html>

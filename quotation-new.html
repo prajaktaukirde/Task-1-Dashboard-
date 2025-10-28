@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Add New Quotation</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        body{background:#F5F7FB;font-family:Arial,Helvetica,sans-serif}
+        .page-header{background:#fff;padding:18px 22px;border-bottom:1px solid #ebeef2}
+        .page-title{font-weight:600;color:#333}
+        .card-panel{background:#FFFFFF;border:1px solid #E2E5EA;padding:18px;border-radius:4px;margin-bottom:18px;box-shadow:0 0 10px rgba(0,0,0,0.05)}
+        .section-title{font-weight:600;margin-bottom:10px;color:#333}
+        .items-table thead th{background:#F8F9FB;border-bottom:1px solid #E2E5EA}
+        .items-table td, .items-table th{vertical-align:middle}
+        .totals-box{background:#fff;border:1px solid #e6e9ee;padding:12px;border-radius:4px}
+        .btn-save{background:#0FB36E;color:#fff;border:0;padding:8px 18px;border-radius:4px}
+        .btn-close{background:#E5E7EB;border:1px solid #ddd;color:#333}
+        .input-sm{height:38px}
+        .muted{color:#8b8f95}
+        .adv-panel{border:1px solid #dcdfe6;border-radius:4px;padding:10px;background:#fafafa}
+    </style>
+</head>
+<body>
+
+<div class="container-fluid">
+    <div class="page-header">
+        <div>
+            <div class="breadcrumb muted">SALES &gt; QUOTATION &gt; <strong>NEW QUOTATION</strong></div>
+            <h4 class="page-title">Add New Quotation</h4>
+        </div>
+    </div>
+
+    <!-- Top form -->
+    <div class="row mt-3">
+        <div class="col-12 card-panel">
+            <div class="row g-3">
+                <div class="col-lg-3">
+                    <label class="form-label">Customer <span class="text-danger">*</span></label>
+                    <div class="input-group">
+                        <select class="form-select input-sm" id="selCustomer">
+                            <option value="">Select Customer</option>
+                            <option>Acme Corporation</option>
+                            <option>Kia</option>
+                        </select>
+                        <button class="btn btn-outline-secondary" id="addCustomerBtn">+</button>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <label class="form-label">Quotation Date <span class="text-danger">*</span></label>
+                    <input type="date" class="form-control input-sm" id="quotationDate">
+                </div>
+                <div class="col-lg-3">
+                    <label class="form-label">Quotation Number #</label>
+                    <div class="d-flex gap-2">
+                        <input class="form-control input-sm" style="width:100px" value="QUOT-" readonly>
+                        <input class="form-control input-sm" value="0120">
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <label class="form-label">Status</label>
+                    <select class="form-select input-sm"><option>Select Status</option></select>
+                </div>
+
+                <div class="col-12 mt-2">
+                    <div class="row g-3">
+                        <div class="col-lg-3">
+                            <label class="form-label">Bill Address</label>
+                            <input class="form-control" placeholder="Company">
+                            <input class="form-control mt-1" placeholder="Street">
+                            <div class="d-flex mt-1"><input class="form-control me-1" placeholder="City"><input class="form-control" placeholder="Zipcode"></div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-label">Ship Address</label>
+                            <input class="form-control" placeholder="Company">
+                            <input class="form-control mt-1" placeholder="Street">
+                            <div class="d-flex mt-1"><input class="form-control me-1" placeholder="City"><input class="form-control" placeholder="Zipcode"></div>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-label">Discount Type</label>
+                            <select class="form-select input-sm"><option>Select Discount Type</option></select>
+
+                            <label class="form-label mt-3">Tags</label>
+                            <select class="form-select input-sm"><option>Select Tags</option></select>
+                        </div>
+                        <div class="col-lg-3">
+                            <label class="form-label">To Attend Of</label>
+                            <input class="form-control" placeholder="Enter To attend of">
+                            <label class="form-label mt-2">S_number</label>
+                            <input class="form-control" placeholder="Enter s_number">
+                            <label class="form-label mt-2">Email Address</label>
+                            <input class="form-control" placeholder="Enter Email Address">
+                        </div>
+                    </div>
+
+                    <div class="mt-3 adv-panel d-flex align-items-center justify-content-between" style="border: 1px solid #800080;">
+                        <strong>Advanced Options</strong>
+                        <div class="d-flex">
+                            <input type="text" class="form-control form-control-sm me-2" placeholder="Search item" style="width: 150px;">
+                            <button class="btn btn-outline-primary btn-sm" style="border-color: #800080; color: #800080;"><i class="fa fa-plus" style="color: #800080;"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Items table + totals -->
+    <div class="row" style="background-color: #F5F7FB; padding: 20px; margin: -20px;">
+        <div class="col-lg-9">
+            <div class="card-panel" style="background-color: #FFFFFF; box-shadow: 0 0 10px rgba(0,0,0,0.05);">
+                <div class="d-flex mb-2">
+                    <div style="background-color: #f0f0f0; padding: 12px 20px; border-radius: 4px; color: #666; margin-right: 15px; display: flex; align-items: center; width: 250px;">
+                        <span>Search Item</span>
+                    </div>
+                    <button class="btn btn-outline-primary btn-sm" style="border-color: #800080; color: #800080;"><i class="fa fa-plus" style="color: #800080;"></i></button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="table table-bordered items-table" style="background-color: #FFFFFF; font-family: 'Inter', sans-serif; font-size: 14px; font-weight: 500; color: #333333; border-color: #e2e5ea;">
+                        <thead>
+                            <tr style="background-color: #F8F9FB; color: #333333;">
+                                <th style="width:40px">#</th>
+                                <th style="width:370px">Items</th>
+                                <th style="width:130px; text-align: center;">HSN / SAC</th>
+                                <th style="width:120px">Qty (Unit)</th>
+                                <th style="width:120px; text-align: right;">Unit Price (₹)</th>
+                                <th style="width:110px">Tax</th>
+                                <th style="width:150px; text-align: right;">Net Amount (₹)</th>
+                                <th style="width:50px"></th>
+                            </tr>
+                        </thead>
+                        <tbody id="itemsBody">
+                            <tr class="item-row" style="height: 60px;">
+                                <td class="align-middle" style="text-align: center;">1</td>
+                                <td>
+                                    <div style="display: flex; align-items: center; margin-bottom: 4px;">
+                                        <span style="font-size: 12px; color: #666; margin-right: 8px;">Item Name</span>
+                                        <i class="fa fa-upload" style="color: green; font-size: 16px;"></i>
+                                    </div>
+                                    <div style="position: relative; height: 38px;">
+                                        <input class="form-control" placeholder="Describe Here..." style="padding-left: 30px; padding-right: 30px; height: 100%; border-radius: 6px; padding: 10px;">
+                                        <i class="fa fa-calendar" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #999;"></i>
+                                    </div>
+                                </td>
+                                <td class="align-middle" style="text-align: center;">HSN / SAC</td>
+                                <td class="align-middle">
+                                    <select class="form-select qty" style="width: 100%;">
+                                        <option selected>Nothing selected</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </td>
+                                <td class="align-middle" style="text-align: right;"><input class="form-control price" placeholder="Rate" type="text" style="text-align: right;"></td>
+                                <td class="align-middle">
+                                    <select class="form-select tax-select" style="width: 100%;">
+                                        <option selected>No Tax</option>
+                                        <option>GST 5%</option>
+                                        <option>GST 12%</option>
+                                    </select>
+                                </td>
+                                <td class="align-middle" style="text-align: right; font-weight: bold;">0.00</td>
+                                <td class="align-middle text-center"><button class="btn btn-outline-success btn-sm" style="width: 30px; height: 30px; padding: 0;"><i class="fa fa-check"></i></button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="mt-3">
+                    <div class="row">
+                        <div class="col-9"></div>
+                        <div class="col-3">
+                            <div style="width: 270px; background: #FAFAFA; border-left: 1px solid #E5E5E5; padding: 20px 24px; font-family: 'Inter', sans-serif; font-size: 14px; color: #333333; margin-top: 0;">
+                                <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span>Sub Total :</span>
+                                    <span id="subTotal" style="text-align: right;">₹0.00</span>
+                                </div>
+                                <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span>Discount :</span>
+                                    <div style="display: flex; align-items: center; gap: 6px;">
+                                        <input id="discountVal" style="width: 60px; height: 32px; border: 1px solid #E2E5EA; border-radius: 6px; padding: 0 8px;" class="form-control form-control-sm" value="0">
+                                        <select id="discountType" style="width: 120px; height: 32px; border: 1px solid #E2E5EA; border-radius: 6px; padding: 0 8px;" class="form-select form-select-sm">
+                                            <option value="percent">% (percentage)</option>
+                                            <option value="fixed">Fixed</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span>Total Tax :</span>
+                                    <span id="taxTotal" style="text-align: right;">+₹0.00</span>
+                                </div>
+                                <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span>Adjustment :</span>
+                                    <input id="adjustment" style="width: 100px; height: 32px; border: 1px solid #E2E5EA; border-radius: 6px; padding: 0 8px; text-align: right;" class="form-control form-control-sm" value="0.00">
+                                </div>
+                                <div style="margin-bottom: 16px; display: flex; justify-content: space-between; align-items: center;">
+                                    <span>Shipping Charges :</span>
+                                    <div style="display: flex; align-items: center;">
+                                        <input id="shipping" style="width: 100px; height: 32px; border: 1px solid #E2E5EA; border-radius: 6px; padding: 0 8px; text-align: right; margin-right: 4px;" class="form-control form-control-sm" value="0.00">
+                                        <i class="fa fa-info-circle" style="color: #999999;"></i>
+                                    </div>
+                                </div>
+                                <div style="margin-bottom: 16px;">
+                                    <a href="#" style="color: #007BFF; text-decoration: none; font-size: 13px;">Add Shipping Tax</a>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; align-items: center; padding-top: 16px; border-top: 1px solid #E5E5E5;">
+                                    <span style="font-weight: 600; font-size: 16px; color: #333333;">Total :</span>
+                                    <span id="grandTotal" style="font-weight: 600; font-size: 16px; color: #333333; text-align: right;">₹0.00</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div style="background-color: #F8F9FB; padding: 20px 0; margin: 20px 0;">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-6" style="padding: 0 12px;">
+                        <label style="font-weight: bold; color: #1E1E1E; margin-bottom: 8px; display: block;">Customer Note</label>
+                        <textarea class="form-control" style="background: #FFFFFF; border: 1px solid #E5E5E5; border-radius: 6px; padding: 12px; height: 80px; box-shadow: none;" placeholder="hi this is Erp software"></textarea>
+                    </div>
+                    <div class="col-lg-6" style="padding: 0 12px;">
+                        <label style="font-weight: bold; color: #1E1E1E; margin-bottom: 8px; display: block;">Terms & Conditions</label>
+                        <textarea class="form-control" style="background: #FFFFFF; border: 1px solid #E5E5E5; border-radius: 6px; padding: 12px; height: 80px; box-shadow: none;" placeholder="Please Enter Terms And Conditions Here"></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+                
+                <div class="mt-4 d-flex justify-content-end">
+                    <button style="background: #e5e7eb; color: #333; border-radius: 6px; padding: 10px 18px; margin-right: 8px; border: none;">CLOSE</button>
+                    <button style="background: #0fb36e; color: white; border-radius: 6px; padding: 10px 22px; border: none;">SAVE</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function parseNumber(v){var n=parseFloat(v);return isNaN(n)?0:n}
+    function recalcRow(row){
+        var qty=parseNumber(row.querySelector('.qty').value);
+        var price=parseNumber(row.querySelector('.price').value);
+        var taxSel=row.querySelector('.tax-select');
+        var taxPct=0;
+        if(taxSel){
+            var t=taxSel.value;
+            if(t.indexOf('5')>-1)taxPct=5;else if(t.indexOf('12')>-1)taxPct=12;
+        }
+        var amt=qty*price;
+        var tax=amt*(taxPct/100);
+        row.querySelector('.amount').textContent = (amt+tax).toFixed(2);
+    }
+    function recalcTotals(){
+        var rows=document.querySelectorAll('#itemsBody .item-row');
+        var sub=0; var taxTotal=0;
+        rows.forEach(function(r){
+            var qty=parseNumber(r.querySelector('.qty').value);
+            var price=parseNumber(r.querySelector('.price').value);
+            var amt=qty*price; sub+=amt;
+            var sel=r.querySelector('.tax-select');
+            var taxPct=0; if(sel){if(sel.value.indexOf('5')>-1)taxPct=5; if(sel.value.indexOf('12')>-1)taxPct=12}
+            taxTotal += amt*(taxPct/100);
+        });
+        document.getElementById('subTotal').textContent = '₹'+sub.toFixed(2);
+        document.getElementById('taxTotal').textContent = '+₹'+taxTotal.toFixed(2);
+        var disc = parseNumber(document.getElementById('discountVal').value);
+        var discType = document.getElementById('discountType').value;
+        var discAmt = discType==='percent' ? sub*(disc/100) : disc;
+        var adjust = parseNumber(document.getElementById('adjustment').value);
+        var ship = parseNumber(document.getElementById('shipping').value);
+        var grand = sub - discAmt + taxTotal + adjust + ship;
+        document.getElementById('grandTotal').textContent = '₹'+grand.toFixed(2);
+    }
+    document.addEventListener('input', function(e){
+        if(e.target.matches('.qty') || e.target.matches('.price') || e.target.matches('.tax-select') ){
+            var row = e.target.closest('.item-row'); if(row){ recalcRow(row); recalcTotals(); }
+        }
+        if(e.target.id==='discountVal' || e.target.id==='adjustment' || e.target.id==='shipping' || e.target.id==='discountType') recalcTotals();
+    });
+    document.getElementById('itemsBody').addEventListener('click', function(e){
+        if(e.target.closest('.save-row')){ alert('Row saved demo'); }
+    });
+    
+    // Function to add new row
+    function addNewRow() {
+        var tbody = document.querySelector('#itemsBody');
+        var rowCount = tbody.querySelectorAll('.item-row').length;
+        var newRow = document.createElement('tr');
+        newRow.className = 'item-row';
+        newRow.style.height = '60px';
+        newRow.innerHTML = 
+            '<td class="align-middle" style="text-align: center;">'+ (rowCount + 1) +'</td>'+ 
+            '<td>'+ 
+                '<div style="display: flex; align-items: center; margin-bottom: 4px;">'+ 
+                    '<span style="font-size: 12px; color: #666; margin-right: 8px;">Item Name</span>'+ 
+                    '<i class="fa fa-upload" style="color: green; font-size: 16px;"></i>'+ 
+                '</div>'+ 
+                '<div style="position: relative; height: 38px;">'+
+                    '<input type="text" class="form-control" placeholder="Describe Here..." style="padding-left: 30px; padding-right: 30px; height: 100%; border-radius: 6px; padding: 10px;">'+ 
+                    '<i class="fa fa-calendar" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); color: #999;">'+ 
+                '</i></div>'+ 
+            '</td>'+ 
+            '<td class="align-middle" style="text-align: center;">HSN / SAC</td>'+ 
+            '<td class="align-middle"><select class="form-select qty" style="width: 100%;"><option selected>Nothing selected</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option></select></td>'+ 
+            '<td class="align-middle" style="text-align: right;"><input type="text" class="form-control price" placeholder="Rate" style="text-align: right;"></td>'+ 
+            '<td class="align-middle"><select class="form-select tax-select" style="width: 100%;"><option selected>No Tax</option><option>GST 5%</option><option>GST 12%</option></select></td>'+ 
+            '<td class="amount align-middle" style="text-align: right; font-weight: bold;">0.00</td>'+ 
+            '<td class="align-middle text-center"><button type="button" class="btn btn-outline-success btn-sm" style="width: 30px; height: 30px; padding: 0;"><i class="fa fa-check"></i></button></td>';
+        tbody.appendChild(newRow);
+        recalcTotals();
+    }
+    
+    // Add event listener for adding new rows (you can attach this to a button)
+    // For now, we'll add a button dynamically
+    document.addEventListener('DOMContentLoaded', function() {
+        var addButton = document.createElement('button');
+        addButton.className = 'btn btn-primary mt-3';
+        addButton.textContent = 'Add New Item';
+        addButton.onclick = addNewRow;
+        document.querySelector('.card-panel').insertBefore(addButton, document.querySelector('.table-responsive'));
+    });
+    
+    // initial
+    document.querySelectorAll('#itemsBody .item-row').forEach(function(r){recalcRow(r)}); recalcTotals();
+
+</script>
+</body>
+</html>

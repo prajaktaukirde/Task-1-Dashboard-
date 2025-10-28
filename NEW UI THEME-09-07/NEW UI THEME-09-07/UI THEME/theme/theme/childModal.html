@@ -1,0 +1,244 @@
+<link rel="stylesheet" href="newstyle05_07.css">
+<form id="form" class="">
+    <div class="row assign-div align-select-length-div">
+        <div class="col-md-12" id="first_col">
+            <div class="demo-html mt-0 enter-exam-mark-div">
+                <table
+                    class="example3 display dataTable display responsive nowrap tblalign table borderless enter-exam-mark-table"
+                     id="example" aria-describedby="example_info">
+                    <thead class="theadrow">
+                        <tr class="">
+                            <th class="">
+                                Admission No
+                            </th>
+                            <th class=""> Roll No.</th>
+                            <th class="">
+                                Student Name
+                            </th>
+                            <th class="">
+                                Class
+                            </th>
+                            <th class="">
+                                Father Name
+                            </th>
+                            <th class="">
+                                Gender
+                            </th>
+                            <th class="">
+                                Theory (TH02)
+                            </th>
+                            <th class="">
+                                Note
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="row-hover">
+
+                            <td class="">
+                                <div class="pt-1">07874</div>
+                                <p class="header-effect align-icon-320-width">
+
+                                    <a href="sales_invoice_edit.html" data-bs-toggle="tooltip" data-bs-title="delete"
+                                        data-bs-auto-close="outside">
+                                        <img src="../../../assets/img/delete.svg" height="15px" width="15px" alt="">
+                                    </a>
+
+                                </p>
+                            </td>
+                            <td class="">
+                                30210
+                            </td>
+                            <td class=""> Scarlett Kennedy</td>
+                            <td class="">Class 4(A)</td>
+                            <td class="">David</td>
+                            <td class="">Female</td>
+                            <td class="hrtble1">
+                                <div class="text-start">
+                                    <div class="d-flex align-items-center">
+                                        <input type="checkbox" class="" name="" id="markAbsent">
+                                        <label for="markAbsent" class="mt-2 mx-1"><span
+                                                class="cursor-pointer fs-small">Mark as Absent</span></label>
+                                    </div>
+                                    <div class="purchasegrp">
+                                        <input type="number" placeholder="Enter Theory (TH02)"
+                                            class="form-control p-1 purchaseselects">
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="">
+                                <div class="purchasegrp">
+                                    <input type="text" placeholder="Enter Note" class="form-control purchaseselects">
+                                </div>
+                            </td>
+
+
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-end align-updated-modal-btn">
+            <div class="modal_save ">
+                <div class="button_su me-2">
+                    <button type="button" class="taskclose1" onclick="handleClick1()" data-bs-dismiss="modal">
+                        <span class="button_text_container ">
+                            CLOSE
+                        </span>
+                    </button>
+                </div>
+
+                <div class="button_su">
+                    <span class="su_button_circle">
+                    </span>
+                    <button type="submit" class=" button_su_inner tasksave1  ms-0 tsk-btn-mr-5 orderclr"><span
+                            class="button_text_container ">
+                            SAVE
+                        </span></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+</form>
+<script>
+    function handleClick1() {
+        document.getElementById('hlo').style.display = 'none'
+
+    }
+</script>
+
+
+<!--   show date picker  -->
+<script>
+    document.getElementById('date').addEventListener('click', () => {
+        if ('showPicker' in HTMLInputElement.prototype) {
+            document.getElementById('date').showPicker();
+        }
+    })
+</script>
+
+
+
+
+<!-- DATATABLE -->
+<script>
+    $(document).ready(function () {
+        var table = $('.example3').DataTable({
+
+            rowReorder: {
+                selector: 'td:nth-child(2)'
+            },
+            language: { lengthMenu: '_MENU_', search: '', searchPlaceholder: " Search for order ID, customer, order status or something..." },
+            responsive: true,
+            dom: 'Blfrtip',
+
+            buttons: [
+                {
+
+                },
+
+
+
+                {
+                    text: '<i class="fa-solid fa-arrow-right-from-bracket"></i> EXPORT',
+                    extend: 'collection',
+                    buttons: [
+
+                        {},
+                        {
+                            text: '<i class="fa-regular fa-file-excel icn me-2 excel-icon"></i> Excel',
+                            extend: 'excel',
+
+                        },
+                        {
+                            text: '<i class="fa-regular fa-file-lines icn me-2 csv-icon"></i> CSV',
+                            extend: 'csv',
+                        },
+                        {
+                            text: '<i class="fa-regular fa-file-pdf icn me-2 pdf-icon"></i> PDF',
+                            extend: 'pdf'
+                        },
+                        {
+                            text: '<i class="fa-solid fa-print me-2 icn print-icon"></i> PRINT',
+                            extend: 'print'
+                        },
+                    ],
+                    className: 'px-3'
+
+                }
+
+            ],
+
+
+        });
+
+    });
+    function checkAll() {
+        checkbox = document.getElementById("all_check");
+        if (checkbox.checked == true) {
+            $('.single_check').prop("checked", true);
+            $('.bulk_send').show(1000);
+        } else {
+            $('.single_check').prop("checked", false);
+            $('.bulk_send').hide(1000);
+        }
+    }
+    function singleCheck(id) {
+        checkbox = document.getElementById("check_" + id);
+        boxes = document.getElementsByClassName("single_check");
+
+
+        if (checkbox.checked == true) {
+            $('.bulk_send').show(1000);
+        } else {
+            count = 0;
+            for (let i = 0; i < boxes.length; i++) {
+                if (boxes[i].checked == true) {
+                    count += 1;
+                }
+            }
+            if (count == 0) {
+                $('.bulk_send').hide(1000);
+                $('#all_check').prop("checked", false);
+            } else {
+                $('.bulk_send').show();
+            }
+        }
+    }
+
+    $(document).ready(function () {
+        const single_checks = document.querySelectorAll('.single_check');
+        const rows = document.querySelectorAll('table.dataTable tbody tr');
+        single_checks.forEach((singleCheck) => {
+            singleCheck.addEventListener('click', (e) => {
+                e.stopPropagation();
+                singleCheck.checked = false;
+            })
+            singleCheck.addEventListener('dblclick', (e) => {
+                e.stopPropagation();
+                singleCheck.checked = true;
+
+            })
+        })
+        rows.forEach((row) => {
+
+            row.addEventListener('dblclick', () => {
+                if (row.firstElementChild.children[0].checked == false) {
+                    row.firstElementChild.children[0].checked = true
+                } else {
+                    row.firstElementChild.children[0].checked = false
+
+                }
+            })
+        })
+
+    })
+
+
+</script>

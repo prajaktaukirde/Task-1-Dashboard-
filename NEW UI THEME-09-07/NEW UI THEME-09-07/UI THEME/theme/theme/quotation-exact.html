@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Quotations - Exact</title>
+
+n    <link rel="shortcut icon" href="../../assets/img/salesqueen_logo.jpeg" type="image/x-icon">
+    <!--Bootstrap 5 CSS--->
+    <link rel="stylesheet" type="text/css" href="../../assets/Bootstrap5/css/bootstrap.css" />
+
+n    <!--Bootstrap 5 JS--->
+    <script type="text/javascript" src="../../assets/Bootstrap5/js/bootstrap.bundle.min.js"></script>
+
+    <!--Bootstrap Icons-->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+
+n    <!-- fontawesome -->
+    <script src="https://kit.fontawesome.com/de952d599f.js" crossorigin="anonymous"></script>
+
+    <!--datatables CSS--->
+    <link rel="stylesheet" type="text/css" href="../../assets/datatables/css/datatables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/datatables/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" type="text/css" href="../../assets/datatables/css/buttons.dataTables.min.css" />
+
+    <!--Datatables js-->
+    <script type="text/javascript" src="../../assets/js/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="../../assets/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="./datatable/datatable.js"></script>
+    <script type="text/javascript" src="../../assets/js/dataTables.responsive.min.js"></script>
+
+    <!--Datatable dropdown----->
+    <script type="text/javascript" src="../../assets/js/datatables.pdfmake.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/datatables.vfs_fonts.js"></script>
+    <script type="text/javascript" src="../../assets/js/datatables.jszip.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" src="../../assets/js/buttons.print.min.js"></script>
+
+    <!--Dropdown select-->
+    <link rel="stylesheet" href="../../assets/Bootstrap5/css/bootstrap-select.min.css" />
+    <script src="../../assets/Bootstrap5/js/bootstrap-select.min.js"></script>
+
+    <link rel="stylesheet" href="../../assets/css/theme.css" />
+    <link rel="stylesheet" href="../../assets/css/style.css" />
+    <style>
+        /* Tokenized UI values derived from theme.css and style.css */
+        :root {
+            --input-height: 37.6px; /* from theme input[name=daterange] */
+            --input-padding: 0.45rem 0.9rem;
+            --input-border: #ced4da; /* style.css default */
+            --input-focus-border: #405189; /* theme focus color */
+            --input-font-size: 14px; /* base body size */
+
+            --pill-padding: 8px 14px;
+            --pill-radius: 6px;
+            --pill-shadow: 0 6px 10px rgba(3,10,51,0.06);
+
+            --tag-bg: #fafbfc;
+            --tag-border: #d7dbe0;
+            --tag-color: #5a6b73;
+            --tag-padding: 4px 8px;
+            --tag-radius: 6px;
+
+            --approved-color: #ff6b6b;
+            --tablehead-bg: #f6f8fb;
+            --tablehead-color: #6b7785;
+
+            --input-gap: 12px; /* gap between textboxes */
+            --th-padding-vertical: 12px;
+            --th-padding-horizontal: 8px;
+        }
+
+        /* container spacing */
+        .container-fluid { padding-top:10px }
+
+        /* left purple vertical strip look */
+        #first_col { border-left:8px solid #463472; padding-left:12px }
+
+        /* inputs and spacing */
+        .form-control,
+        input[type="text"],
+        input[type="search"],
+        select.form-control {
+            height: var(--input-height);
+            padding: var(--input-padding);
+            font-size: var(--input-font-size);
+            border: 1px solid var(--input-border);
+            margin-right: var(--input-gap);
+            box-sizing: border-box;
+        }
+
+        .form-control:focus,
+        input:focus {
+            border-color: var(--input-focus-border) !important;
+            box-shadow: none !important;
+        }
+
+        /* summary pill look */
+        .pill { box-shadow: var(--pill-shadow); border-radius: var(--pill-radius); padding: var(--pill-padding); background:#fff }
+
+        /* table header subtle background */
+        .theadrow th { background:var(--tablehead-bg); color:var(--tablehead-color); font-weight:600; padding: var(--th-padding-vertical) var(--th-padding-horizontal); }
+
+        /* table cell padding */
+        table.tblalign td, table.tblalign th { padding: var(--th-padding-vertical) var(--th-padding-horizontal) }
+
+        /* expiry color */
+        .expiry { color:#e24b4b; font-weight:700 }
+
+        /* tag styles */
+        .tags { display:flex; flex-wrap:wrap; gap:6px; }
+        .tags .tag { background:var(--tag-bg); border:1px solid var(--tag-border); color:var(--tag-color); padding:var(--tag-padding); border-radius:var(--tag-radius); font-size:13px; }
+
+        /* approved badge */
+        .approvedbtn { color:var(--approved-color); border:1px solid var(--approved-color); background:#fff; padding:4px 8px; border-radius:6px; font-weight:700; font-size:13px; display:inline-block; }
+
+        /* search/input group spacing (if filters row exists) */
+        .filters { display:flex; gap: var(--input-gap); align-items:center; }
+
+        /* responsive adjustments */
+        @media (max-width:767px) {
+            .form-control { margin-right: 0; margin-bottom: 8px; width:100%; }
+            .filters { flex-direction:column; align-items:stretch; }
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-9 qarow mgbttn">
+                        <button type="button" class="hrbtns contractbtn addbttn"> <i class="fa fa-plus"></i> ADD</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class=" card col-md-12 me-3" id="first_col">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12" id="first_col">
+                            <div class="demo-html mt-0">
+
+                                <table class="example display dataTable display responsive nowrap tblalign table borderless" id="example">
+                                    <thead class="theadrow">
+                                        <tr>
+                                            <th><input type="checkbox" id="all_check" onchange="checkAll()"></th>
+                                            <th>S.No</th>
+                                            <th>ID</th>
+                                            <th>Purchase ID</th>
+                                            <th>Title</th>
+                                            <th>Tags</th>
+                                            <th>User</th>
+                                            <th>active</th>
+                                            <th>options 1</th>
+                                            <th>options 2</th>
+                                            <th>Status</th>
+                                            <th>Priority</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="row-hover">
+                                            <td class="progtble"><input type="checkbox" onchange="toggleRowBackground(this)" class="single_check" onclick=" singleCheck()"></td>
+                                            <td>01</td>
+                                            <td class="hrtble1 "><a href="#"><span class="viewbtn">VLZ-452</span></a>
+                                                <p class="header-effect ">
+                                                    <a onclick="toggleViews(1)" data-bs-toggle="tooltip" data-placement="bottom" data-bs-title="view" data-bs-auto-close="outside">
+                                                        <img src="../../assets/img/view.svg" height="15px" width="15px" alt="">
+                                                    </a>
+                                                    <a href="sales_invoice_edit.html" data-bs-toggle="tooltip" data-bs-title="edit" data-bs-auto-close="outside">
+                                                        <img src="../../assets/img/edit.svg" height="15px" width="15px" alt="">
+                                                    </a>
+                                                    <a href="sales_invoice_edit.html" data-bs-toggle="tooltip" data-bs-title="delete" data-bs-auto-close="outside">
+                                                        <img src="../../assets/img/delete.svg" height="15px" width="15px" alt="">
+                                                    </a>
+                                                </p>
+                                            </td>
+                                            <td>VLZ140087402</td>
+                                            <td>Post launch </td>
+                                            <td>
+                                                <span class="tags">
+                                                    <span class="tag">Html & Css</span>
+                                                    <span class="tag">javascript</span>
+                                                </span>
+                                            </td>
+                                            <td>Joseph Parker</td>
+                                            <td><button type="button" id="stbutton" class=" status-button  dropdown-toggle dd-toggle" data-bs-toggle="dropdown">In Progress</button></td>
+                                            <td><label class="switchslider"> <input type="checkbox" checked><span class="slider round"></span></label></td>
+                                            <td><button type="button" class="editpenbtn " data-bs-toggle="tooltip" data-bs-title="edit" data-bs-auto-close="outside"><i class="fa fa-edit"></i></button></td>
+                                            <td><span class="approvedbtn ">Accepted</span></td>
+                                            <td><span class="draft_label">HIGH</span></td>
+                                        </tr>
+                                        <!-- copy rows to approximate screenshot length -->
+                                        <tr class="row-hover"> ... </tr>
+                                        <tr class="row-hover"> ... </tr>
+
+                                    </tbody>
+                                </table>
+
+n                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

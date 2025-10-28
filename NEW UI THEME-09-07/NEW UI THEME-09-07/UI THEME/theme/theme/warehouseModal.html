@@ -1,0 +1,847 @@
+
+<!-- <form action="" id="addlead3"> -->
+    <link rel="stylesheet" href="newstyle05_07.css">
+    <link rel="stylesheet" href="warehousestyle.css">
+<form action="" id="addlead2">
+    <div class="row" style="margin-bottom: 10px;">
+
+        <div class="col-md-12">
+
+            <div class="desktop">
+                <hr class="fileline ali_marktos" style="margin-bottom:0px; ">
+                <div class="scroll-images custml toptea ">
+                    <div class="child mb-0 ms-0" style="margin-top: 0px; margin-bottom:0px;">
+                        <button class="tablinks tb-links active" type="button" onclick="openTab(event, 'tab1')"><i
+                                class="fa-solid fa-bars" style="margin: 3px !important;"></i> General
+                            details</button>
+                    </div>
+                    <div class="child mb-0" style="margin-top: 0px; margin-bottom:0px;">
+                        <button class="tablinks tb-links" type="button" onclick="openTab(event, 'tab2')"><i
+                                class="fa-solid fa-bars" style="margin: 3px !important;"></i> Info</button>
+                    </div>
+
+
+                </div>
+                <hr class="fileline " style=" margin-top: 0px;">
+            </div>
+
+        </div>
+
+
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-interval="false" style="height: 50px;">
+            <hr class="fileline" style="margin-bottom: 0px;">
+            <div class="carousel-inner scroll-images" style="margin-bottom: 40px; margin-top:0px">
+
+
+                <div class="carousel-item active" style="text-align: center; ">
+                    <div class="">
+                        <div class="child mb-0" style="height:auto; margin-top: 0px;">
+                            <button class="tablinks active tabresact resmargintop0px wm "
+                                style="width:70%; margin-top:0px;" type="button" onclick="openTab(event, 'general')"><i
+                                    class="fa-solid fa-bars" style="margin: 3px !important;"> </i>General
+                                details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item" style="text-align: center;">
+                    <div class="">
+                        <div class="child mb-0" style="height:auto; margin-top: 0px;">
+                            <button class="tablinks tabresact resmargintop0px wm " style="width:70%; margin-top:0px;"
+                                type="button" onclick="openTab(event, 'billing')"><i class="fa-solid fa-bars"
+                                    style="margin: 3px !important;"> </i>Custom Fields</button>
+                        </div>
+                    </div>
+                </div>
+
+
+                <button id="prevButton" class="carousel-control-prev mke_topost" type="button"
+                    data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <i class="bi bi-chevron-left icon" style="color:black;font-weight: bold; margin-bottom: 15px;"></i>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+
+                <button id="nextButton" class="carousel-control-next mke_topost" type="button"
+                    data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <i class="bi bi-chevron-right icon" style="color:black;font-weight:bold;margin-bottom: 15px; "></i>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                <hr class="fileline marg_alitop" style="margin-top: 42px;">
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="tab1" class="tabcontent2" style="display:block">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="purchasegrps resmarginleft0px">
+                    <label for="unitname" class="purchaseinfo mb-0"> <span class=" aster">* </span>Warehouse
+                        name</label>
+                    <input type="text" placeholder="Enter Warehouse name" class="form-control purchaseselects"
+                        name="warehouse_code" spellcheck="true">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="purchasegrps resmarginleft0px">
+                    <label for="unitname" class="purchaseinfo mb-0"> <span class=" aster">* </span>Order</label>
+                    <input type="text" placeholder="Enter Order" class="form-control purchaseselects"
+                        name="warehouse_name" spellcheck="true">
+                </div>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-md-12">
+                <div class="purchasegrps">
+                    <label for="unitname" class="purchaseinfo mb-1"> <span class=" aster">* </span>Order</label>
+                    <input type="text" class="form-control purchaseselects" name="order" spellcheck="true">
+                </div>
+            </div>
+        </div> -->
+        <!-- <div class="row">
+            <div class="col-md-6">
+                        <div class="purchasegrps">
+                            <label for="unitname" class="emailpro mb-2">Warehouse address</label>
+                            <textarea class="textdesc  " rows="2" name="address"></textarea>
+                        </div>
+                
+            </div>
+            <div class="col-md-6">
+                <div class="purchasegrps">
+                    <label for="unitname" class="purchaseinfo">City</label>
+                    <input type="text" class="form-control purchaseselects" name="city">
+                </div>
+                <div class="purchasegrps">
+                    <label for="unitname" class="purchaseinfo">State</label>
+                    <input type="text" class="form-control purchaseselects" name="state">
+                </div>
+            </div>
+        </div>
+        <div class="row">        
+            <div class="col-md-6">
+                <div class="purchasegrps">
+                    <label for="unitname" class="purchaseinfo mb-1">Postal code</label>
+                    <input type="text" class="form-control purchaseselects" name="code">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="purchasegrps">
+                    <label for="tags" class="purchaseinfo mb-2">Country</label>
+                    <select class="selectpicker form-control" name="country">
+                        <option value="0"></option>
+                        <option value="1">Afand Islands</option>
+                        <option value="2">Albania</option>
+                        <option value="3">Algeria</option>
+                        <option value="4">America Samoa</option>
+                        <option value="5">Andorra</option>
+                        <option value="6">Angola</option>
+                        <option value="7">Anguilla</option>
+                        <option value="8">India</option>
+                        <option value="9">Andorra</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+         -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="purchasegrps resmarginleft0px">
+                    <label for="unitname" class="emailpro mb-2">&nbspNote</label>
+                    <textarea class="textdesc" placeholder="Note" rows="2" name="note"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <div class="row ">
+            <div class="col-md-12" style="margin-left: 5px;">
+                <div class="checkbox form-group purchasegrp">
+                    <input type="checkbox" class="form-check-input  marginleft0px" style="margin-top: 2px;"
+                        name="display">
+                    <label> Display</label>
+                </div>
+
+            </div>
+        </div>
+        <br>
+        <div class="row mb-0">
+            <div class="col-md-12 blkftr ali_esolc mb-0">
+                <div class="modal-footer taskfooter mt-0 paddingright19px">
+                    <button type="button" class="taskclose1" data-bs-dismiss="modal">CLOSE</button>
+                    <button type="submit" class="tasksave1  mdb " form="addlead2">SAVE</button>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+    <div id="tab2" class="tabcontent2" style="display: none">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="purchasegrps">
+                    <label for="unitname" class="purchaseinfo mb-0"> <span class=" aster">* </span>Warehouse
+                        code</label>
+                    <input type="text" placeholder="Enter Warehouse code" class="form-control purchaseselects"
+                        name="order" spellcheck="true">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="purchasegrps">
+                    <label for="unitname" class="emailpro mb-2">&nbspWarehouse address</label>
+                    <textarea class="textdesc aghil_hght" placeholder="Enter Warehouse address" rows="2"
+                        name="address"></textarea>
+                </div>
+            </div>
+            <div class="col-md-6 mt-1">
+                <div class="purchasegrps">
+                    <label for="unitname" class="purchaseinfo ">City</label>
+                    <input type="text" placeholder="Enter City" class="form-control purchaseselects mt-0" name="city">
+                </div>
+                <div class="purchasegrps">
+                    <label for="unitname" class="purchaseinfo">State</label>
+                    <input type="text" placeholder="Enter State" class="form-control purchaseselects mt-0" name="state">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6 mb-1">
+                <div class="purchasegrps">
+                    <label for="unitname" class="purchaseinfo mb-0">Postal code</label>
+                    <input type="text" placeholder="Enter Postal code" class="form-control purchaseselects mb-1"
+                        name="code">
+                </div>
+            </div>
+            <div class="col-md-6 mt-1">
+                <div class="purchasegrps">
+                    <label for="tags" class="purchaseinfo mb-2">Country</label>
+                    <select class="selectpicker form-control aghl_hgtofinpbpx" title="Select Country" name="country">
+                        <option value="0"></option>
+                        <option value="1">Afand Islands</option>
+                        <option value="2">Albania</option>
+                        <option value="3">Algeria</option>
+                        <option value="4">America Samoa</option>
+                        <option value="5">Andorra</option>
+                        <option value="6">Angola</option>
+                        <option value="7">Anguilla</option>
+                        <option value="8">India</option>
+                        <option value="9">Andorra</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="purchasegrps">
+                    <label for="unitname" class="purchaseinfo mb-0">GPS</label>
+                    <input type="text" placeholder="Enter GPS" class="form-control purchaseselects" name="code">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="purchasegrps ">
+                    <label for="unitname" class="purchaseinfo mb-0 mr-2">Capacity</label>
+                    <input type="text" placeholder="Enter Capacity" class="form-control purchaseselects" name="code">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="purchasegrps">
+                    <label for="unitname" class="purchaseinfo mb-0"> <span class=" aster">* </span>Operational hours
+                    </label>
+                    <input type="text" placeholder="Enter Operational hours" class="form-control purchaseselects"
+                        name="order" spellcheck="true">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div id="parent1" class="row">
+                <div class="col-md-4">
+                    <div class="chseexc ">
+                        <label for="" class="purchaseinfo mb-0">Attachment</label>
+                        <div class="input-group d-flex flex-nowrap ml-1 mt-1 att">
+                            <input type="file" class="file_in">
+                            <span class="input-group-addon">
+                                <button id="add_btn1" type="button" class="ctctgrnbtn"><i
+                                        class="fa fa-plus"></i></button>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="row bordertest-padding">
+                <div class="flex items-center justify-center border-test">
+                    <div id="drop-zone">
+                        <img src="" alt="">
+                        <p class="dropfile">Drop file or click to upload</p>
+                        <label for="myfile" class="file-input-label">
+                            <input type="file" id="myfile">
+                        </label>
+                    </div>
+                    <div class="text-container">
+                        <div class="file-name"></div>
+                        <button class="delete-button btn-danger" id="deleteBtn">Delete</button>
+                    </div>
+                </div>
+            </div> -->
+        <div class="row">
+            <!-- <div class="col-md-6 mx-auto mt-3">
+
+                    <link href="https://fonts.googleapis.com/css?family=Material+Icons|Material+Icons+Outlined" rel="stylesheet" /> -->
+            <!-- Added overlay div -->
+            <!-- <div class="overlay" id="overlay">
+                        <i class="fa-solid fa-cloud-arrow-up"></i>
+                        Drop your files here...
+                        <span class="corner-symbol symbole-top-left">L</span>
+                        <span class="corner-symbol symbole-bottom-left">L</span>
+                        <span class="corner-symbol symbole-top-right">L</span>
+                        <span class="corner-symbol symbole-bottom-right">L</span>
+                    </div>
+                    <div class="upload-files-container" style="background: none;">
+                        <div class="drag-file-area drags">
+                            <span class="material-icons-outlined upload-icon"> file_upload
+                            </span>
+                            <h3 class="dynamic-message" style="color: #6c757d;">Drag & drop
+                                any
+                                file here</h3> -->
+            <!-- <label class="label" style="margin-left: -300px;">
+
+                                                    <span class="browse-files">
+                                                        <input type="file" class="default-file-input" />
+                                                        <span style="color: #6c757d;">or</span>
+                                                        <span class="browse-files-text">browse file</span>
+                                                        <span style="color: #6c757d;">from device</span>
+                                                    </span>
+                                                </label> -->
+            <!-- <label class="label"> -->
+            <!-- or
+                                                    <span class="browse-files">
+                                                        <input type="file" class="default-file-input" />
+                                                        <span class="browse-files-text">browse file</span>
+                                                        <span>from device</span>
+                                                    </span> -->
+            <!-- <span class="browse-files">
+                                    <input type="file" class="default-file-input">
+                                    <span style="color: #6c757d;">or</span>
+                                    <br>
+                                    <span>
+                                        <span class="browse-files-text">browse file</span>
+                                        <span style="color: #6c757d;">from device</span>
+                                    </span>
+
+                                </span>
+                            </label>
+                        </div>
+                        <span class="cannot-upload-message">
+                            <span class="material-icons-outlined">error</span> Please select
+                            a
+                            file
+                            first
+                            <span class="material-icons-outlined cancel-alert-button">cancel</span>
+                        </span>
+                        <div class="file-block">
+                            <div class="file-info">
+                                <span class="material-icons-outlined file-icon">description</span>
+                                <span class="file-name"> </span> | <span class="file-size">
+                                </span>
+                            </div>
+                            <span class="material-icons remove-file-icon">delete</span>
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                </div> -->
+            <div class="row mt-3 mb-3">
+                <div class="col-md-3"></div>
+                <div class="col-md-6  pe-3">
+                    <div class="overlay" id="overlay">Drop your files here...</div>
+
+                    <div class="upload-files-container">
+                        <div class="drag-file-area pd_evn width100">
+                            <span class="material-icons-outlined upload-icon"> file_upload
+                            </span>
+                            <h3 class="dynamic-message" style="color: #6c757d;">Drag & drop
+                                any
+                                file here</h3>
+                            <!-- <label class="label" style="margin-left: -300px;">
+
+                                                    <span class="browse-files">
+                                                        <input type="file" class="default-file-input" />
+                                                        <span style="color: #6c757d;">or</span>
+                                                        <span class="browse-files-text">browse file</span>
+                                                        <span style="color: #6c757d;">from device</span>
+                                                    </span>
+                                                </label> -->
+                            <label class="label">
+                                <!-- or
+                                                    <span class="browse-files">
+                                                        <input type="file" class="default-file-input" />
+                                                        <span class="browse-files-text">browse file</span>
+                                                        <span>from device</span>
+                                                    </span> -->
+                                <span class="browse-files">
+                                    <input type="file" class="default-file-input">
+                                    <span style="color: #6c757d;">or</span>
+                                    <br>
+                                    <span>
+                                        <span class="browse-files-text">browse file</span>
+                                    </span>
+
+                                </span>
+                            </label>
+                        </div>
+                        <span class="cannot-upload-message">
+                            <span class="material-icons-outlined">error</span> Please select
+                            a
+                            file
+                            first
+                            <span class="material-icons-outlined cancel-alert-button">cancel</span>
+                        </span>
+                        <div class="file-block">
+                            <div class="file-info">
+                                <span class="material-icons-outlined file-icon">description</span>
+                                <span class="file-name"> </span> <span class="file-size badge rounded-pill">
+                                </span>
+                            </div>
+                            <span class="material-icons remove-file-icon">delete</span>
+                            <div class="progress-bar"></div>
+                        </div>
+                    </div>
+                    <span class="cannot-upload-message">
+                        <span class="material-icons-outlined">error</span> Please select
+                        a file
+                        first
+                        <span class="material-icons-outlined cancel-alert-button">cancel</span>
+                    </span>
+                    <?php if (!empty($edit->file)) : ?>
+                    <div class="file-block" style="display:flex;">
+                        <div class="file-info">
+                            <span class="material-icons-outlined file-icon">description</span>
+                            <span class="file-name">
+                                <?= $edit->file ?>
+                            </span>
+                        </div>
+                        <span class="material-icons remove-file-icon" onclick="removeFile(this)">delete</span>
+                    </div>
+                    <?php endif ?>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-12 blkftr ali_bottommargforsave">
+                <div class="modal-footer taskfooter paddingright19px ">
+                    <button type="button" class="taskclose1 me-0" data-bs-dismiss="modal">CLOSE</button>
+                    <!-- <button type="submit" class="tasksave1">SAVE</button> -->
+                    <button type="submit" class="tasksave1 " form="addlead2">SAVE</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</form>
+<script>
+    $(document).ready(function () {
+        $('#addlead2').formValidation({
+            framework: 'bootstrap',
+            fields: {
+                // city: {
+                //     validators: {
+                //         notEmpty: {
+                //             message: 'This field is required'
+                //         }
+                //     }
+                // },
+                // state: {
+                //     validators: {
+                //         notEmpty: {
+                //             message: 'This field is required'
+                //         }
+                //     }
+                // },
+                warehouse_name: {
+                    validators: {
+                        notEmpty: {
+                            message: 'This field is required'
+                        }
+                    }
+                },
+                warehouse_code: {
+                    validators: {
+                        notEmpty: {
+                            message: 'This field is required'
+                        }
+                    }
+                },
+                order: {
+                    validators: {
+                        notEmpty: {
+                            message: 'This field is required'
+                        }
+                    }
+                },
+            }
+        })
+            // .on('success.form.fv', function (e) {
+            //     e.preventDefault();
+
+            //     var form = document.querySelector('#addlead2');
+            //     var dataForm = new FormData(form);
+
+            //     $.ajax({
+            //         type: 'POST',
+            //         url: '<?= base_url() ?>/home/saveWarehouse',
+            //         data: dataForm,
+            //         cache: false,
+            //         contentType: false,
+            //         processData: false,
+            //         dataType: 'json',
+            //         success: function (result) {
+            //             console.log(result);
+            //             toastr.success('Data saved successfully', 'Success');
+            //             $('#modal_md').modal('hide');
+            //             setTimeout(function () {
+            //                 location.reload();
+            //             }, 800);
+            //         },
+            //         error: function (error) {
+            //             console.error(error);
+            //             toastr.error('An error occurred', 'Error');
+            //         }
+            //     });
+            // });
+    });
+</script>
+
+<script>
+    function openTab(evt, tabName)
+    {
+        // Declare all variables
+        var i, tabcontent, tablinks;
+
+        // Get all elements with class="tabcontent" and hide them
+        tabcontent = document.getElementsByClassName("tabcontent2");
+        for (i = 0; i < tabcontent.length; i++)
+        {
+            tabcontent[i].style.display = "none";
+        }
+
+        // Get all elements with class="tablinks" and remove the class "active"
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++)
+        {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+
+        // Show the current tab, and add an "active" class to the button that opened the tab
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+    var carousel = document.getElementById("carouselExampleIndicators");
+
+    carousel.addEventListener("slid.bs.carousel", function (event)
+    {
+        var activeSlideIndex = event.to;
+        if (activeSlideIndex === 0)
+        {
+
+            openTab(event, 'tab1');
+
+        }
+        else if (activeSlideIndex === 1)
+        {
+
+            openTab(event, 'tab2');
+
+        }
+
+    });
+
+
+
+</script>-->
+
+<script>
+    function openTab(evt, tabName) {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent2");
+        for (i = 0; i < tabcontent.length; i++) {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++) {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+
+        // Show "Close" and "Save" buttons when the second tab is clicked
+        if (tabName === 'tab2') {
+            document.getElementById('closeButton').style.display = "inline-block";
+            document.getElementById('saveButton').style.display = "inline-block";
+        } else {
+            document.getElementById('closeButton').style.display = "none";
+            document.getElementById('saveButton').style.display = "none";
+        }
+    }
+
+    // Open the second tab by default
+    document.addEventListener("DOMContentLoaded", function () {
+        openTab(event, 'tab2');
+    });
+</script>
+
+
+<!--<script>
+    function openTab(evt, tabName)
+    {
+        var i, tabcontent, tablinks;
+        tabcontent = document.getElementsByClassName("tabcontent");
+        for (i = 0; i < tabcontent.length; i++)
+        {
+            tabcontent[i].style.display = "none";
+        }
+        tablinks = document.getElementsByClassName("tablinks");
+        for (i = 0; i < tablinks.length; i++)
+        {
+            tablinks[i].className = tablinks[i].className.replace(" active", "");
+        }
+        document.getElementById(tabName).style.display = "block";
+        evt.currentTarget.className += " active";
+    }
+
+</script>
+-->
+<script>
+    // const dropZone = document.querySelector('#drop-zone');
+    // const inputElement = document.querySelector('#myfile');
+    // const img = document.querySelector('img');
+    // const p = document.querySelector('.dropfile');
+    // const fileNameElement = document.querySelector('.file-name');
+    // const deleteButton = document.querySelector('#deleteBtn');
+
+    // inputElement.addEventListener('change', function(e) {
+    //     const file = this.files[0];
+    //     if (file) {
+    //         img.style.display = "block";
+    //         p.style.display = 'none';
+    //         fileNameElement.textContent = file.name;
+    //         deleteButton.style.display = 'inline-block';
+
+    //         const reader = new FileReader();
+    //         reader.readAsDataURL(file);
+    //         reader.onloadend = function() {
+    //             const src = this.result;
+    //             img.src = src;
+    //             img.alt = file.name;
+    //         }
+    //     }
+    // });
+
+    // dropZone.addEventListener('click', () => inputElement.click());
+    // dropZone.addEventListener('dragover', (e) => {
+    //     e.preventDefault();
+    // });
+
+    // dropZone.addEventListener('drop', (e) => {
+    //     e.preventDefault();
+    //     img.style.display = "block";
+    //     const file = e.dataTransfer.files[0];
+    //     // p.style.display = 'none';
+
+    //     const reader = new FileReader();
+    //     reader.readAsDataURL(file);
+    //     reader.onloadend = function() {
+    //         e.preventDefault();
+    //         p.style.display = 'none';
+    //         fileNameElement.textContent = file.name;
+    //         deleteButton.style.display = 'inline-block';
+
+    //         const src = this.result;
+    //         img.src = src;
+    //         img.alt = file.name;
+    //     }
+    // });
+
+    // deleteButton.addEventListener('click', () => {
+    //     img.src = '';
+    //     img.style.display = 'none';
+    //     p.style.display = 'block';
+    //     fileNameElement.textContent = '';
+    //     deleteButton.style.display = 'none';
+    //     inputElement.value = '';
+    // });
+
+    // drag and drop code
+
+    var isAdvancedUpload = (function () {
+        var div = document.createElement("div");
+        return (
+            ("draggable" in div || ("ondragstart" in div && "ondrop" in div)) &&
+            "FormData" in window &&
+            "FileReader" in window
+        );
+    })();
+
+    let fileInput = document.querySelector(".default-file-input");
+    let uploadButton = document.querySelector(".upload-button");
+    let uploadedFilesContainer = document.querySelector(".upload-files-container");
+    let overlay = document.getElementById("overlay");
+    let dragFileArea = document.querySelector(".drag-file-area");
+    let dragCounter = 0;
+
+    function showOverlay() {
+        overlay.style.display = "flex";
+        overlay.style.flexDirection = "column";
+    }
+
+    function hideOverlay() {
+        overlay.style.display = "none";
+    }
+
+    ["dragenter", "dragover", "dragleave", "drop"].forEach((eventName) => {
+        window.addEventListener(
+            eventName,
+            function (e) {
+                e.preventDefault();
+                e.stopPropagation();
+            },
+            false
+        );
+    });
+
+    window.addEventListener("dragenter", function (e) {
+        dragCounter++;
+        showOverlay();
+    });
+
+    window.addEventListener("dragleave", function (e) {
+        dragCounter--;
+        if (dragCounter === 0) {
+            hideOverlay();
+        }
+    });
+
+    window.addEventListener("drop", function (e) {
+        dragCounter = 0;
+        hideOverlay();
+        processFiles(e.dataTransfer.files);
+    });
+
+    fileInput.addEventListener("change", function () {
+        processFiles(fileInput.files);
+    });
+
+    dragFileArea.addEventListener("click", () => {
+        let input = document.createElement("input");
+        input.type = "file";
+        input.onchange = (_this) => {
+            let files = Array.from(input.files);
+            processFiles(files);
+        };
+        input.click();
+    });
+
+    let allFiles = []; // Array to store all files
+
+    function processFiles(files) {
+        Array.from(files).forEach((file) => {
+            allFiles.push(file); // Add new file to the array
+            processFile(file);
+        });
+    }
+
+    function processFile(file) {
+        let fileBlock = document.createElement("div");
+        fileBlock.className = "file-block";
+        fileBlock.style.display = "flex";
+        fileBlock.innerHTML = `
+    <div class="file-info">
+     <span class="material-icons-outlined file-icon">description</span>
+     <span class="file-name">${file.name}</span> 
+     <span class="file-size badge rounded-pill">${(file.size / 1024).toFixed(
+            1
+        )} KB</span>
+    </div>
+    <span class="material-icons remove-file-icon" onclick="removeFile(this)">delete</span>
+    <div class="progress-bar" style="width: 0; height: 5px; bottom: 0; position: absolute;"></div>`;
+        uploadedFilesContainer.appendChild(fileBlock);
+    }
+
+    window.removeFile = function (element) {
+        let fileName = element
+            .closest(".file-block")
+            .querySelector(".file-name").textContent;
+        allFiles = allFiles.filter((file) => file.name !== fileName); // Remove file from the array
+        element.closest(".file-block").remove();
+    };
+
+    uploadButton.addEventListener("click", function () {
+        // Remove the behavior that opens the file input
+        // Instead, call the function to start uploading files
+        uploadFiles();
+    });
+
+    window.addEventListener("paste", function (e) {
+        const items = (e.clipboardData || e.originalEvent.clipboardData).items;
+        let files = [];
+        for (let item of items) {
+            if (item.kind === "file") {
+                let file = item.getAsFile();
+                files.push(file);
+            }
+        }
+        if (files.length > 0) {
+            processFiles(files);
+        }
+    });
+
+    // Function to simulate the upload process
+    function uploadFiles() {
+        let fileBlocks = uploadedFilesContainer.querySelectorAll(".file-block");
+        fileBlocks.forEach((block) => {
+            // Simulate file upload progress
+            let progressBar = block.querySelector(".progress-bar");
+            let width = 0;
+            let intervalId = setInterval(() => {
+                if (width >= 100) {
+                    clearInterval(intervalId);
+                    progressBar.style.width = "100%";
+                } else {
+                    width++;
+                    progressBar.style.width = width + "%";
+                }
+            }, 50);
+        });
+    }
+
+    // Trigger the upload process when the upload button is clicked
+    uploadButton.addEventListener("click", function () {
+        // Assuming all files are ready to upload, for example purposes
+        uploadFiles();
+    });
+
+    // Add a click event listener to the cancel (X) button to hide the upload message
+    document
+        .querySelector(".cancel-alert-button")
+        .addEventListener("click", function () {
+            document.querySelector(".cannot-upload-message").style.display = "none";
+        });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $("#add_btn1").click(function () {
+            $("#parent1").append('<div id="coldiv" class="col-md-4"><div class="chseexc"><label for="" class="purchaseinfo mb-1">Attachment</label><div class="input-group d-flex flex-nowrap"><input type="file" class="file_in"><span class="input-group-addon"><button id="remove_btn" type="button" class="ctctredbtn ctctgrnbtn"><i class="fa fa-minus"></i></button></span></div></div></div>');
+        });
+        $(document).on('click', '#remove_btn', function () {
+            $(this).closest('#coldiv').remove();
+        });
+    });
+</script>
